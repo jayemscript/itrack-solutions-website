@@ -18,7 +18,7 @@ export default function HeroSection() {
           {/* Left Content Section */}
           <div className="flex flex-col justify-center space-y-6 md:space-y-8">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 w-fit px-4 py-2 rounded-full bg-primary/10 dark:bg-primary/20 border border-primary/30 dark:border-primary/40">
+            <div className="inline-flex items-center gap-2 w-fit px-4 py-2 rounded-full bg-primary/10 dark:bg-primary/20 border border-primary/30 dark:border-primary/40 ">
               <span className="w-2 h-2 rounded-full bg-primary dark:bg-primary"></span>
               <span className="text-sm font-medium ">IT Solutions</span>
             </div>

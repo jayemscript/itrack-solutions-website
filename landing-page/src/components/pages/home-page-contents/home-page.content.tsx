@@ -9,7 +9,9 @@ import HomePageWhyUs from './home-page-why-us';
 export default function HomePageContent() {
   return (
     <div>
-      <HeroSection />
+      <div className='mt-5'>
+        <HeroSection />
+      </div>
       <div id="features">
         <HomePageFeatures />
       </div>
