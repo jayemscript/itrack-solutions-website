@@ -16,12 +16,12 @@ export default function PublicRouteLayout({
       <div className="flex min-h-screen scroll-smooth">
         {/* Main Content */}
         <div className="flex-1 flex flex-col">
-          <div className="sticky top-0 z-20 bg-background">
+          <div className="sticky top-0 z-20">
             <Header />
           </div>
 
-          <div className="flex-1 overflow-auto bg-white ">
-            <div className="bg-gray-200">{children}</div>
+          <div className="flex-1 overflow-auto">
+            <div className="">{children}</div>
             <Footer />
           </div>
         </div>

@@ -1,43 +1,5 @@
 // src/utils/route-constants.ts
-export const publicRoutes = [
-  '/',
-  '/login',
-  '/passkey',
-  '/forbidden',
-  //   "/register",
-  //   "/register-verify",
-  //   "/register-complete",
-  //   "/reset-password",
-  //   "/reset-password-verify",
-  //   "/reset-password-complete",
-  //   "/explore",
-  //   "/creators",
-  '/about',
-  '/about/organizational-structures',
-  '/about/barangay-map',
-  '/about/accomplishments',
-  '/register',
-  '/services',
-  '/services/certificate-of-indigency',
-  '/services/barangay-clearance',
-  '/services/certificate-of-residency',
-  '/services/certificate-of-community-tax',
-  '/services/business-permit',
-  '/services/certificate-complaint',
-  '/services/building-permit',
-  '/services/certificate-of-good-moral',
-
-  '/announcements',
-  '/announcements/community-activity',
-  '/announcements/health-program',
-  '/announcements/social-services',
-  '/announcements/safety-security',
-  '/announcements/sports-recreation',
-  '/announcements/education-training',
-
-  '/projects',
-  '/report',
-];
+export const publicRoutes = ['/'];
 
 export const privateRoutes = [
   '/employee',
