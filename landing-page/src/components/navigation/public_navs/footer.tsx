@@ -151,7 +151,7 @@ export default function Footer() {
               <li className="flex items-start space-x-3 text-sm">
                 <MapPin className="w-5 h-5 text-primary shrink-0 mt-0.5" />
                 <span className="text-muted-foreground">
-                  123 Tech Innovation Park, Metro Manila, Philippines 1600
+                  123 Tandang Sora, Culiat Quezon City, Metro Manila, Philippines
                 </span>
               </li>
               <li className="flex items-center space-x-3 text-sm">

@@ -76,7 +76,8 @@ export default function ContactPageContent() {
     {
       icon: MapPin,
       title: 'Address',
-      value: '123 Business Street, Tech City, TC 12345',
+      value:
+        '123 Tandang Sora, Culiat Quezon City, Metro Manila, Philippines',
       href: '#',
     },
     {
