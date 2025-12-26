@@ -4,8 +4,8 @@ import HomePageContent from '@/components/pages/home-page-contents/home-page.con
 import PublicRouteLayout from '@/app/(public)/layout';
 
 export const metadata: Metadata = {
-  title: 'Home | E-Services',
-  description: 'Welcome to Barangay Luntian E-Services',
+  title: 'Home | Itrack Solutions - IT Solutions & Products',
+  description: 'Welcome to Itrack Solutions - Your Partner in IT Solutions and Products',
 };
 
 export default async function Home() {
