@@ -20,9 +20,7 @@ export default function HeroSection() {
             {/* Badge */}
             <div className="inline-flex items-center gap-2 w-fit px-4 py-2 rounded-full bg-primary/10 dark:bg-primary/20 border border-primary/30 dark:border-primary/40">
               <span className="w-2 h-2 rounded-full bg-primary dark:bg-primary"></span>
-              <span className="text-sm font-medium ">
-                IT Solutions
-              </span>
+              <span className="text-sm font-medium ">IT Solutions</span>
             </div>
 
             {/* Main Heading */}
@@ -91,7 +89,7 @@ export default function HeroSection() {
           <div className="relative flex lg:hidden flex-col gap-4">
             <div className="relative w-full h-64 rounded-xl overflow-hidden shadow-lg border border-border dark:border-border/50 bg-card dark:bg-card/50">
               <Image
-                src="/images/img-hero-1.png"
+                src="/images/img-hero-1.jpg"
                 alt="Itrack Solutions - Dashboard"
                 fill
                 className="object-cover"
@@ -101,7 +99,7 @@ export default function HeroSection() {
             <div className="grid grid-cols-2 gap-3">
               <div className="relative h-32 rounded-lg overflow-hidden shadow-md border border-border dark:border-border/50 bg-card dark:bg-card/50">
                 <Image
-                  src="/images/img-hero-2.png"
+                  src="/images/img-hero-2.jpg"
                   alt="Itrack Solutions - Analytics"
                   fill
                   className="object-cover"
@@ -109,7 +107,7 @@ export default function HeroSection() {
               </div>
               <div className="relative h-32 rounded-lg overflow-hidden shadow-md border border-border dark:border-border/50 bg-card dark:bg-card/50">
                 <Image
-                  src="/images/img-hero-3.png"
+                  src="/images/img-hero-3.jpg"
                   alt="Itrack Solutions - Integration"
                   fill
                   className="object-cover"
