@@ -1,56 +1,50 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { Facebook, Linkedin, Twitter, Mail, Phone, MapPin } from 'lucide-react';
-import {
-  homeSubMenus,
-  servicesSubMenus,
-  productSubMenus,
-  aboutSubMenus,
-} from './menus';
-import { ThemeButtons } from '@/components/customs/theme-buttons';
+import React from "react";
+import Image from "next/image";
+import { Facebook, Linkedin, Twitter, Mail, Phone, MapPin } from "lucide-react";
+import { ThemeButtons } from "@/components/customs/theme-buttons";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
-  // Quick links for IT Solutions
   const quickLinks = [
-    { name: 'Home', href: '/' },
-    { name: 'Services', href: '/services' },
-    { name: 'Products', href: '/products' },
-    { name: 'About Us', href: '/about' },
-    { name: 'Contact', href: '/contact' },
+    { name: "Home", href: "/" },
+    { name: "Services", href: "/services" },
+    { name: "Products", href: "/products" },
+    { name: "About Us", href: "/about" },
+    { name: "Contact", href: "/contact" },
   ];
 
   const serviceLinks = [
-    { name: 'Custom Development', href: '/services/custom-development' },
-    { name: 'Mobile Apps', href: '/services/mobile-apps' },
+    { name: "Custom Development", href: "/services/custom-development" },
+    { name: "Mobile Apps", href: "/services/mobile-apps" },
   ];
 
   const resources = [
-    { name: 'Privacy Policy', href: '/privacy' },
-    { name: 'Terms & Conditions', href: '/terms' },
-    { name: 'Service Agreement', href: '/service-agreement' },
+    { name: "Privacy Policy", href: "/privacy" },
+    { name: "Terms & Conditions", href: "/terms" },
+    { name: "Service Agreement", href: "/service-agreement" },
   ];
 
   const socialLinks = [
     {
-      name: 'Facebook',
+      name: "Facebook",
       icon: Facebook,
-      href: 'https://facebook.com/itracksolutions',
-      color: 'hover:text-blue-600 dark:hover:text-blue-400',
+      href: "https://facebook.com/itracksolutions",
+      color: "hover:text-blue-600 dark:hover:text-blue-400",
     },
     {
-      name: 'LinkedIn',
+      name: "LinkedIn",
       icon: Linkedin,
-      href: 'https://linkedin.com/company/itracksolutions',
-      color: 'hover:text-blue-700 dark:hover:text-blue-300',
+      href: "https://linkedin.com/company/itracksolutions",
+      color: "hover:text-blue-700 dark:hover:text-blue-300",
     },
     {
-      name: 'Twitter',
+      name: "Twitter",
       icon: Twitter,
-      href: 'https://twitter.com/itracksolutions',
-      color: 'hover:text-sky-500 dark:hover:text-sky-400',
+      href: "https://twitter.com/itracksolutions",
+      color: "hover:text-sky-500 dark:hover:text-sky-400",
     },
   ];
 
@@ -62,11 +56,13 @@ export default function Footer() {
           {/* Company Info */}
           <div className="space-y-4">
             <div className="flex items-center space-x-3">
-              <div className="w-12 h-12 bg-linear-to-br from-primary to-secondary rounded-lg flex items-center justify-center shadow-md">
-                <span className="text-primary-foreground font-bold text-lg">
-                  IT
-                </span>
-              </div>
+              <Image
+                src="/images/itrack-logo.jpg"
+                alt="Itrack Solutions logo"
+                width={48}
+                height={48}
+                className="rounded-lg shadow-md"
+              />
               <div>
                 <h3 className="text-foreground font-semibold text-lg">
                   Itrack Solutions

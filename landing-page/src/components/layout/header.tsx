@@ -1,6 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';
 import HeaderNavDesktop from './header-nav-desktop';
@@ -9,7 +10,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
-
   return (
     <header className="sticky top-0 z-50 bg-primary dark:bg-primary shadow-md border-b border-primary/30">
       <div className="container mx-auto px-4">
@@ -19,9 +19,14 @@ export default function Header() {
             href="/"
             className="flex items-center space-x-3 hover:opacity-80 transition-opacity group"
           >
-            <div className="w-10 h-10 bg-primary-foreground rounded-lg flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow">
-              <span className="text-lg font-bold text-primary">IT</span>
-            </div>
+            <Image
+              src="/images/itrack-logo.jpg"
+              alt="Itrack Solutions logo"
+              width={40}
+              height={40}
+              className="rounded-lg shadow-md group-hover:shadow-lg transition-shadow"
+              priority
+            />
             <div className="flex flex-col">
               <span className="text-primary-foreground font-bold text-base leading-tight">
                 Itrack
@@ -31,12 +36,10 @@ export default function Header() {
               </span>
             </div>
           </Link>
-
           {/* Desktop Nav */}
           <div className="hidden lg:flex items-center">
             <HeaderNavDesktop />
           </div>
-
           <div className="flex items-center space-x-3">
             {/* CTA Button Desktop */}
             <div className="hidden lg:flex items-center space-x-3">
@@ -49,7 +52,6 @@ export default function Header() {
                 </Button>
               </Link>
             </div>
-
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsOpen(!isOpen)}
@@ -59,7 +61,6 @@ export default function Header() {
             </button>
           </div>
         </div>
-
         {/* Mobile Nav */}
         <AnimatePresence>
           {isOpen && (
