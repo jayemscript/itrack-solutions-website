@@ -9,7 +9,7 @@ import {
   CardDescription,
 } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
-import { servicesSubMenus } from '@/components/navigation/public_navs/menus';
+import { servicesSubMenus } from '@/components/layout/menus';
 import { motion, easeInOut } from 'framer-motion';
 
 export default function ServicePageContent() {

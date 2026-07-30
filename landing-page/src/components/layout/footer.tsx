@@ -62,7 +62,7 @@ export default function Footer() {
           {/* Company Info */}
           <div className="space-y-4">
             <div className="flex items-center space-x-3">
-              <div className="w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-lg flex items-center justify-center shadow-md">
+              <div className="w-12 h-12 bg-linear-to-br from-primary to-secondary rounded-lg flex items-center justify-center shadow-md">
                 <span className="text-primary-foreground font-bold text-lg">
                   IT
                 </span>
@@ -151,7 +151,8 @@ export default function Footer() {
               <li className="flex items-start space-x-3 text-sm">
                 <MapPin className="w-5 h-5 text-primary shrink-0 mt-0.5" />
                 <span className="text-muted-foreground">
-                  123 Tandang Sora, Culiat Quezon City, Metro Manila, Philippines
+                  123 Tandang Sora, Culiat Quezon City, Metro Manila,
+                  Philippines
                 </span>
               </li>
               <li className="flex items-center space-x-3 text-sm">

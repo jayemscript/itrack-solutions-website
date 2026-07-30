@@ -2,8 +2,8 @@
 
 'use client';
 
-import Header from '@/components/navigation/public_navs/header';
-import Footer from '@/components/navigation/public_navs/footer';
+import Header from '@/components/layout/header';
+import Footer from '@/components/layout/footer';
 
 export default function PublicRouteLayout({
   children,

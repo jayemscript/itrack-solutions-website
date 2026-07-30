@@ -9,7 +9,7 @@ import {
   CardDescription,
 } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
-import { productSubMenus } from '@/components/navigation/public_navs/menus';
+import { productSubMenus } from '@/components/layout/menus';
 import { motion, easeInOut } from 'framer-motion';
 import {
   Smartphone,
