@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import ProductPageContent from '@/app/(public)/products/components/product-page-content';
+import ProductPageContent from '@/app/(main)/products/components/product-page-content';
 
 export const metadata: Metadata = {
   title:

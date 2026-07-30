@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import ServicePageContent from '@/app/(public)/services/components/services-page-content';
+import ServicePageContent from '@/app/(main)/services/components/services-page-content';
 
 export const metadata: Metadata = {
   title: 'Services',
