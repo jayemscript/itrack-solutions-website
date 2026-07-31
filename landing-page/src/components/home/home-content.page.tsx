@@ -1,12 +1,18 @@
 "use client";
 
-import { HomeHeroPage } from "./home-hero.page";
+import { HomeHeroPage, HomeFeaturesPage, HomeWhyChooseUsPage } from "./index";
 
 export function HomeContentPage() {
   return (
     <div>
-      <div className="">
+      <div>
         <HomeHeroPage />
+      </div>
+      <div id="features">
+        <HomeFeaturesPage />
+      </div>
+      <div id="why-us">
+        <HomeWhyChooseUsPage />
       </div>
     </div>
   );

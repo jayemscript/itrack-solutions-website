@@ -8,10 +8,10 @@ import HeaderNavDesktop from './header-nav-desktop';
 import HeaderNavMobile from './header-nav-mobile';
 import { motion, AnimatePresence } from 'framer-motion';
 
-export default function Header() {
+export default function Header({ isScrolled = false }: { isScrolled?: boolean }) {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <header className="sticky top-0 z-50 bg-primary dark:bg-primary shadow-md border-b border-primary/30">
+    <header className={`transition-all duration-300 ${isScrolled ? 'mx-3 mt-3 rounded-xl border border-primary/20 bg-primary/95 shadow-2xl backdrop-blur-md lg:mx-auto lg:max-w-7xl' : 'border-b border-primary/30 bg-primary shadow-md'}`}>
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center py-4">
           {/* Left: Logo */}

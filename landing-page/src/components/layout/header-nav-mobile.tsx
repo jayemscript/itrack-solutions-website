@@ -106,7 +106,7 @@ export default function HeaderNavMobile({ onNavigate }: HeaderNavMobileProps) {
                       className="flex items-start gap-3 rounded-md p-3  transition-colors group dark:hover:bg-primary/20 text-white"
                     >
                       {Icon && (
-                        <Icon className="h-4 w-4 mt-0.5 flex-shrink-0" />
+                        <Icon className="h-4 w-4 mt-0.5 shrink-0" />
                       )}
                       <div className="flex flex-col gap-1">
                         <span className="text-sm font-medium">

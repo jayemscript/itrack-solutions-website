@@ -19,17 +19,18 @@ import {
   aboutSubMenus,
 } from './menus';
 
-// Helper function to handle smooth scrolling for hash links
-const handleHashClick = (
+// Smooth-scroll to a section without putting a hash in the URL.
+const handleSectionClick = (
   e: React.MouseEvent<HTMLAnchorElement>,
   href: string,
 ) => {
-  const isHashLink = href.startsWith('/#') || href.startsWith('#');
+  const url = new URL(href, window.location.origin);
+  const section = url.searchParams.get('section');
+  const isSectionLink = Boolean(section);
 
-  if (isHashLink) {
+  if (isSectionLink) {
     e.preventDefault();
-    const hash = href.includes('#') ? '#' + href.split('#')[1] : href;
-    const element = document.querySelector(hash);
+    const element = document.getElementById(section!);
 
     if (element) {
       const headerOffset = 75;
@@ -42,9 +43,9 @@ const handleHashClick = (
         behavior: 'smooth',
       });
 
-      window.history.pushState(null, '', href);
+      window.history.pushState(null, '', url.pathname);
     } else {
-      console.warn(`Element with selector "${hash}" not found`);
+      window.location.assign(url.pathname);
     }
   }
 };
@@ -121,20 +122,20 @@ const ListItem = React.forwardRef<
   }
 >(({ className, title, children, href, icon: Icon, ...props }, ref) => {
   const pathname = usePathname();
-  const isHashLink = href?.startsWith('/#') || href?.startsWith('#');
-  const isCurrentPage = pathname === '/' && isHashLink;
+  const section = href ? new URL(href, 'http://localhost').searchParams.get('section') : null;
+  const isSectionLink = Boolean(section);
 
   return (
     <li>
       <NavigationMenuLink asChild>
         <Link
           ref={ref}
-          href={href || '#'}
+          href={href || '/'}
           onClick={(e) => {
             if (href) {
-              // If we're on the home page and clicking a hash link, use smooth scroll
-              if (pathname === '/' && isHashLink) {
-                handleHashClick(e, href);
+              // Scroll locally when the target section belongs to this page.
+              if (new URL(href, window.location.origin).pathname === pathname && isSectionLink) {
+                handleSectionClick(e, href);
               }
               // Otherwise, Next.js Link will handle routing normally
             }
@@ -144,7 +145,7 @@ const ListItem = React.forwardRef<
             className,
           )}
           // SEO: Use prefetch for better performance
-          prefetch={!isHashLink}
+          prefetch={!isSectionLink}
           {...props}
         >
           <div className="flex items-center gap-2">

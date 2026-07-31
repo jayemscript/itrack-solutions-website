@@ -18,13 +18,13 @@ import {
 const homeSubMenus = [
   {
     title: 'Features',
-    href: '/#features',
+    href: '/?section=features',
     description: 'Key features of our solutions',
     icon: Zap,
   },
   {
     title: 'Why Choose Us',
-    href: '/#why-us',
+    href: '/?section=why-us',
     description: 'What makes us different',
     icon: Shield,
   },
@@ -94,13 +94,13 @@ const aboutSubMenus = [
   },
   {
     title: 'Our Team',
-    href: '/about#team',
+    href: '/about?section=team',
     description: 'Meet our experts',
     icon: Users,
   },
   {
     title: 'Our Values',
-    href: '/about#values',
+    href: '/about?section=values',
     description: 'What we believe in',
     icon: Shield,
   },
