@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import ServicesPageMobileApps from '../components/services-page-mobile-apps';
+import { ServicesMobileAppPage} from '@/components/services';
 
 export const metadata: Metadata = {
   title: 'Mobile Apps | Itrack Solutions',
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function MobileApps() {
   return (
     <div>
-      <ServicesPageMobileApps />
+      <ServicesMobileAppPage />
     </div>
   );
 }

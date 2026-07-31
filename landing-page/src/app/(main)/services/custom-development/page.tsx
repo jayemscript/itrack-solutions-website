@@ -1,16 +1,16 @@
-import type { Metadata } from 'next';
-import ServicesPageCustomDevelopment from '../components/services-page-custom-development';
+import type { Metadata } from "next";
+import { ServicesCustomDevelopmentPage } from "@/components/services";
 
 export const metadata: Metadata = {
-  title: 'Custom Development | Itrack Solutions',
+  title: "Custom Development | Itrack Solutions",
   description:
-    'Tailored software solutions designed to meet your specific business needs and challenges.',
+    "Tailored software solutions designed to meet your specific business needs and challenges.",
 };
 
 export default function CustomDevelopment() {
   return (
     <div>
-      <ServicesPageCustomDevelopment />
+      <ServicesCustomDevelopmentPage />
     </div>
   );
 }

@@ -1,10 +1,10 @@
-import type { Metadata } from 'next';
-import ServicePageContent from '@/app/(main)/services/components/services-page-content';
+import type { Metadata } from "next";
+import { ServicePageContent } from "@/components/services";
 
 export const metadata: Metadata = {
-  title: 'Services',
+  title: "Services",
   description:
-    'Access a variety of IT services designed to help your business thrive in the digital age. Explore Different solutions tailored to your needs.',
+    "Access a variety of IT services designed to help your business thrive in the digital age. Explore Different solutions tailored to your needs.",
 };
 export default function ServicesPage() {
   return (
