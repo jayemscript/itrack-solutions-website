@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import AboutPageContent from "@/app/(main)/about/about-page-contents/about-page-content";
+import { AboutContentPage } from "@/components/about";
 
 export const metadata: Metadata = {
   title: "About Us | Itrack Solutions - IT Solutions & Products",
@@ -33,5 +33,5 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
-  return <AboutPageContent />;
+  return <AboutContentPage />;
 }
