@@ -1,17 +1,18 @@
 // app/page.tsx
-import type { Metadata } from 'next';
-import HomePageContent from '@/components/pages/home-page-contents/home-page.content';
-import PublicRouteLayout from '@/app/(main)/layout';
+import type { Metadata } from "next";
+import { HomeContentPage } from "@/components/home";
+import PublicRouteLayout from "@/app/(main)/layout";
 
 export const metadata: Metadata = {
-  title: 'Home | Itrack Solutions - IT Solutions & Products',
-  description: 'Welcome to Itrack Solutions - Your Partner in IT Solutions and Products',
+  title: "Home | Itrack Solutions - IT Solutions & Products",
+  description:
+    "Welcome to Itrack Solutions - Your Partner in IT Solutions and Products",
 };
 
 export default async function Home() {
   return (
     <PublicRouteLayout>
-      <HomePageContent />
+      <HomeContentPage />
     </PublicRouteLayout>
   );
 }
