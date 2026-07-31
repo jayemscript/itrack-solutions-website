@@ -1,10 +1,9 @@
-// src/app(public)/layout.tsx
+//src/app(public)/layout.tsx
 
 "use client";
 
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
-import { DotField } from "@/components/backgrounds/dot-field";
 
 export default function PublicRouteLayout({
   children,
@@ -12,30 +11,21 @@ export default function PublicRouteLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <DotField
-          dotRadius={1.5}
-          dotSpacing={14}
-          bulgeStrength={67}
-          glowRadius={160}
-          sparkle={false}
-          waveAmplitude={0}
-          cursorRadius={500}
-          cursorForce={0.1}
-          bulgeOnly
-          gradientFrom="#A855F7"
-          gradientTo="#B497CF"
-          glowColor="#120F17"
-    >
-      <div className="flex min-h-screen flex-col">
-        <div className="sticky top-0">
-          <Header />
-        </div>
+    <>
+      {/* <div className="flex h-[100vh]"> */}
+      <div className="flex min-h-screen scroll-smooth">
+        {/* Main Content */}
+        <div className="flex-1 flex flex-col">
+          <div className="sticky top-0 z-20">
+            <Header />
+          </div>
 
-        <div className="flex-1">
-          <div>{children}</div>
-          <Footer />
+          <div className="flex-1 overflow-auto">
+            <div className="">{children}</div>
+            <Footer />
+          </div>
         </div>
       </div>
-    </DotField>
+    </>
   );
 }
