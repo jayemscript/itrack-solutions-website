@@ -31,21 +31,21 @@ export default function Footer() {
     {
       name: "Facebook",
       icon: Facebook,
-      href: "https://facebook.com/itracksolutions",
+      href: "https://www.facebook.com/profile.php?id=61580801156034",
       color: "hover:text-blue-600 dark:hover:text-blue-400",
     },
-    {
-      name: "LinkedIn",
-      icon: Linkedin,
-      href: "https://linkedin.com/company/itracksolutions",
-      color: "hover:text-blue-700 dark:hover:text-blue-300",
-    },
-    {
-      name: "Twitter",
-      icon: Twitter,
-      href: "https://twitter.com/itracksolutions",
-      color: "hover:text-sky-500 dark:hover:text-sky-400",
-    },
+    // {
+    //   name: "LinkedIn",
+    //   icon: Linkedin,
+    //   href: "https://linkedin.com/company/itracksolutions",
+    //   color: "hover:text-blue-700 dark:hover:text-blue-300",
+    // },
+    // {
+    //   name: "Twitter",
+    //   icon: Twitter,
+    //   href: "https://twitter.com/itracksolutions",
+    //   color: "hover:text-sky-500 dark:hover:text-sky-400",
+    // },
   ];
 
   return (
