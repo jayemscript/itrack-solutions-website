@@ -1,8 +1,0 @@
-{
-  "rewrites": [
-    {
-      "source": "/backend/(.*)",
-      "destination": "https://rvtm-aims-server.onrender.com/api/$1"
-    }
-  ]
-}
