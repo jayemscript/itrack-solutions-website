@@ -11,6 +11,9 @@ import {
   Lock,
   Smartphone,
   Settings,
+  RefreshCw,
+  ClipboardList,
+  LifeBuoy,
 } from 'lucide-react';
 
 // --- Submenu definitions for IT Solutions ---
@@ -32,22 +35,40 @@ const homeSubMenus = [
 
 const servicesSubMenus = [
   {
-    title: 'All Services',
-    href: '/services',
-    description: 'Explore all IT solutions',
+    title: "All Services",
+    href: "/services",
+    description: "Explore all IT solutions",
     icon: Code2,
   },
   {
-    title: 'Custom Development',
-    href: '/services/custom-development',
-    description: 'Tailored software solutions',
+    title: "Custom Development",
+    href: "/services/custom-development",
+    description: "Tailored software solutions",
     icon: Code2,
   },
   {
-    title: 'Mobile Apps',
-    href: '/services/mobile-apps',
-    description: 'Mobile App development',
+    title: "Mobile Apps",
+    href: "/services/mobile-apps",
+    description: "Mobile App development",
     icon: Smartphone,
+  },
+  {
+    title: "Legacy Migration",
+    href: "/services/migration",
+    description: "Modernize aging systems",
+    icon: RefreshCw,
+  },
+  {
+    title: "Consultation",
+    href: "/services/consultation",
+    description: "Project scoping & technical audits",
+    icon: ClipboardList,
+  },
+  {
+    title: "Support & Maintenance",
+    href: "/services/support",
+    description: "Ongoing fixes & monitoring",
+    icon: LifeBuoy,
   },
 ];
 
