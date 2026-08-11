@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ServicesCustomDevelopmentPage } from "@/components/services";
+import { CustomDevelopmentPage } from "@/components/services";
 
 export const metadata: Metadata = {
   title: "Custom Development | Itrack Solutions",
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function CustomDevelopment() {
   return (
     <div>
-      <ServicesCustomDevelopmentPage />
+      <CustomDevelopmentPage />
     </div>
   );
 }
