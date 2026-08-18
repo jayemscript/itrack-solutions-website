@@ -1,30 +1,28 @@
 "use client";
 
+import React from "react";
 import { Button } from "@/components/ui";
 import { motion, type Variants } from "framer-motion";
 import {
   ArrowRight,
+  Building2,
+  Cable,
   Check,
   ChevronRight,
-  CreditCard,
   MapPin,
-  Monitor,
-  Package,
+  Network,
+  ShieldCheck,
   Store,
-  Timer,
-  Utensils,
+  Warehouse,
+  Wifi,
 } from "lucide-react";
 
-type FeatureIconKey =
-  | "terminals"
-  | "readers"
-  | "peripherals"
-  | "multi-location";
+type FeatureIconKey = "switching" | "wireless" | "cabling" | "security";
 type UseCaseIconKey =
   | "retail"
-  | "hospitality"
-  | "quick-service"
-  | "multi-location";
+  | "warehousing"
+  | "multi-location"
+  | "back-of-house";
 
 interface ProductHero {
   breadcrumbCurrent: string;
@@ -69,7 +67,7 @@ interface ClosingCta {
   secondaryCta: { label: string; href: string };
 }
 
-interface PosHardwareContent {
+interface NetworkingEquipmentContent {
   hero: ProductHero;
   features: SectionIntro & { items: FeatureItem[] };
   useCases: SectionIntro & { items: UseCaseItem[] };
@@ -77,122 +75,125 @@ interface PosHardwareContent {
   closing: ClosingCta;
 }
 
-const posHardwareContent: PosHardwareContent = {
+const networkingEquipmentContent: NetworkingEquipmentContent = {
   hero: {
-    breadcrumbCurrent: "POS Hardware",
-    eyebrow: "POS HARDWARE",
+    breadcrumbCurrent: "Networking Equipment",
+    eyebrow: "NETWORKING EQUIPMENT",
     headline: {
-      lead: "Checkout hardware that matches",
-      emphasis: "how you actually sell.",
+      lead: "The network holds up",
+      emphasis: "everything you just installed.",
     },
     description:
-      "Terminals, cash drawers, card readers, and customer displays configured for retail and hospitality checkout — installed and connected to your POS software, not dropped off in a box.",
+      "Switches, access points, routers, and structured cabling that keep every POS, kiosk, and scanner online — sized and configured for your location, not just plugged in and left.",
     primaryCta: { label: "Request a Quote", href: "/services/consultation" },
     secondaryCta: { label: "View All Products", href: "/products" },
   },
   features: {
     eyebrow: "KEY FEATURES",
-    heading: "Built for the counter, not the demo floor.",
+    heading: "Infrastructure sized for what's actually running on it.",
     description:
-      "Every setup is sized and configured for the checkout flow it's actually running.",
+      "Every network is planned around the devices it needs to carry, not the other way around.",
     items: [
       {
-        id: "terminals",
-        title: "Touchscreen Terminals",
+        id: "switching",
+        title: "Switches & Routers",
         description:
-          "All-in-one or modular setups sized to your counter space and order volume.",
-        icon: "terminals",
+          "Managed and unmanaged switching sized to your device count and traffic.",
+        icon: "switching",
       },
       {
-        id: "readers",
-        title: "Card & Contactless Readers",
+        id: "wireless",
+        title: "Wireless Access Points",
         description:
-          "EMV, tap-to-pay, and mobile wallet support built in, not bolted on.",
-        icon: "readers",
+          "Coverage planned around your floor plan, not just one router in a corner.",
+        icon: "wireless",
       },
       {
-        id: "peripherals",
-        title: "Cash Drawers & Peripherals",
+        id: "cabling",
+        title: "Structured Cabling",
         description:
-          "Drawers, customer displays, and scales matched to your checkout flow.",
-        icon: "peripherals",
+          "Cabling run and labeled to a standard your next technician can actually follow.",
+        icon: "cabling",
       },
       {
-        id: "multi-location",
-        title: "Multi-Location Ready",
+        id: "security",
+        title: "Security & Firewalls",
         description:
-          "Configurations that stay consistent across every register and every branch.",
-        icon: "multi-location",
+          "Network segmentation and firewall rules that keep POS traffic separate from guest Wi-Fi.",
+        icon: "security",
       },
     ],
   },
   useCases: {
     eyebrow: "WHERE IT'S USED",
-    heading: "Configured differently at every counter.",
+    heading: "Different layout, different network.",
     description:
-      "The same hardware line, set up around how each checkout actually runs.",
+      "The same core infrastructure, planned around how each location actually operates.",
     items: [
       {
         id: "retail",
         step: "01",
-        title: "Retail Checkout",
-        description: "Fast, reliable checkout built for peak-hour lines.",
+        title: "Retail & Hospitality",
+        description:
+          "POS, kiosks, and guest Wi-Fi running on properly segmented networks.",
         icon: "retail",
       },
       {
-        id: "hospitality",
+        id: "warehousing",
         step: "02",
-        title: "Hospitality & F&B",
-        description: "Order-taking, split checks, and kitchen printer routing.",
-        icon: "hospitality",
-      },
-      {
-        id: "quick-service",
-        step: "03",
-        title: "Quick-Service Counters",
+        title: "Warehousing & Logistics",
         description:
-          "Streamlined single-screen setups for high-turnover counters.",
-        icon: "quick-service",
+          "Coverage that reaches scanners and mobile devices across the whole floor.",
+        icon: "warehousing",
       },
       {
         id: "multi-location",
-        step: "04",
-        title: "Multi-Location Retail",
-        description: "Centralized reporting across every register you run.",
+        step: "03",
+        title: "Multi-Location Business",
+        description:
+          "Consistent, centrally managed networking across every branch.",
         icon: "multi-location",
+      },
+      {
+        id: "back-of-house",
+        step: "04",
+        title: "Office & Back-of-House",
+        description:
+          "Reliable wired and wireless coverage for the team behind the counter.",
+        icon: "back-of-house",
       },
     ],
   },
   included: {
     eyebrow: "WHAT'S INCLUDED",
-    heading: "The terminal is the visible part.",
+    heading: "The network is invisible until it isn't.",
     description:
-      "Every POS hardware deployment includes what it takes to make it work on day one.",
+      "Every networking deployment includes what it takes to keep it that way.",
     points: [
       {
-        id: "config",
-        title: "Software configuration",
+        id: "survey",
+        title: "Site survey & design",
         description:
-          "Terminals configured and connected to your POS software before they reach the counter.",
+          "Coverage and cabling planned around your actual floor plan before anything gets installed.",
       },
       {
-        id: "payments",
-        title: "Payment processor setup",
+        id: "segmentation",
+        title: "Configuration & segmentation",
         description:
-          "Card readers paired and tested with your payment processor, not left for you to figure out.",
+          "Networks set up and separated so one device going down doesn't take the rest with it.",
       },
       {
-        id: "training",
-        title: "Staff training",
+        id: "monitoring",
+        title: "Monitoring & support",
         description:
-          "Your team walked through the hardware before it goes live at the register.",
+          "Uptime watched and issues caught before they turn into a full outage.",
       },
     ],
   },
   closing: {
-    heading: "Setting up a new register?",
+    heading: "Is your network the weak link?",
     description:
-      "Tell us your checkout flow and volume — we'll spec the right terminal setup.",
+      "Tell us your location and device count — we'll spec the right network to run it all on.",
     primaryCta: { label: "Request a Quote", href: "/services/consultation" },
     secondaryCta: { label: "View All Products", href: "/products" },
   },
@@ -202,10 +203,10 @@ const featureIcons: Record<
   FeatureIconKey,
   React.ComponentType<{ className?: string }>
 > = {
-  terminals: Monitor,
-  readers: CreditCard,
-  peripherals: Package,
-  "multi-location": Store,
+  switching: Network,
+  wireless: Wifi,
+  cabling: Cable,
+  security: ShieldCheck,
 };
 
 const useCaseIcons: Record<
@@ -213,9 +214,9 @@ const useCaseIcons: Record<
   React.ComponentType<{ className?: string }>
 > = {
   retail: Store,
-  hospitality: Utensils,
-  "quick-service": Timer,
+  warehousing: Warehouse,
   "multi-location": MapPin,
+  "back-of-house": Building2,
 };
 
 const containerVariants: Variants = {
@@ -228,8 +229,8 @@ const itemVariants: Variants = {
   show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" } },
 };
 
-export function PosHardwarePage() {
-  const content = posHardwareContent;
+export function NetworkingEquipmentPage() {
+  const content = networkingEquipmentContent;
 
   return (
     <>
@@ -314,7 +315,7 @@ function ProductHeroSection({ hero }: { hero: ProductHero }) {
 function FeaturesSection({
   section,
 }: {
-  section: PosHardwareContent["features"];
+  section: NetworkingEquipmentContent["features"];
 }) {
   return (
     <section className="bg-muted/40 py-20 lg:py-24">
@@ -357,7 +358,7 @@ function FeaturesSection({
 function UseCasesSection({
   section,
 }: {
-  section: PosHardwareContent["useCases"];
+  section: NetworkingEquipmentContent["useCases"];
 }) {
   return (
     <section className="bg-background py-20 lg:py-24">
@@ -405,7 +406,7 @@ function UseCasesSection({
 function IncludedSection({
   section,
 }: {
-  section: PosHardwareContent["included"];
+  section: NetworkingEquipmentContent["included"];
 }) {
   return (
     <section className="bg-muted/40 py-20 lg:py-24">

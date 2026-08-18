@@ -1,30 +1,28 @@
 "use client";
 
+import React from "react";
 import { Button } from "@/components/ui";
 import { motion, type Variants } from "framer-motion";
 import {
   ArrowRight,
   Check,
   ChevronRight,
-  CreditCard,
-  MapPin,
-  Monitor,
-  Package,
+  Factory,
+  Layers,
+  ScanLine,
+  ShieldCheck,
   Store,
-  Timer,
-  Utensils,
+  Warehouse,
+  Wifi,
+  Wrench,
 } from "lucide-react";
 
-type FeatureIconKey =
-  | "terminals"
-  | "readers"
-  | "peripherals"
-  | "multi-location";
+type FeatureIconKey = "symbology" | "form-factor" | "wireless" | "rugged";
 type UseCaseIconKey =
   | "retail"
-  | "hospitality"
-  | "quick-service"
-  | "multi-location";
+  | "warehousing"
+  | "field-service"
+  | "manufacturing";
 
 interface ProductHero {
   breadcrumbCurrent: string;
@@ -69,7 +67,7 @@ interface ClosingCta {
   secondaryCta: { label: string; href: string };
 }
 
-interface PosHardwareContent {
+interface BarcodeScannersContent {
   hero: ProductHero;
   features: SectionIntro & { items: FeatureItem[] };
   useCases: SectionIntro & { items: UseCaseItem[] };
@@ -77,122 +75,125 @@ interface PosHardwareContent {
   closing: ClosingCta;
 }
 
-const posHardwareContent: PosHardwareContent = {
+const barcodeScannersContent: BarcodeScannersContent = {
   hero: {
-    breadcrumbCurrent: "POS Hardware",
-    eyebrow: "POS HARDWARE",
+    breadcrumbCurrent: "Barcode Scanners",
+    eyebrow: "BARCODE SCANNERS",
     headline: {
-      lead: "Checkout hardware that matches",
-      emphasis: "how you actually sell.",
+      lead: "Scanners built for",
+      emphasis: "your throughput, not the showroom.",
     },
     description:
-      "Terminals, cash drawers, card readers, and customer displays configured for retail and hospitality checkout — installed and connected to your POS software, not dropped off in a box.",
+      "Handheld and fixed-mount barcode scanners for retail, warehousing, and field operations — paired with your POS or inventory system before they ever reach the floor.",
     primaryCta: { label: "Request a Quote", href: "/services/consultation" },
     secondaryCta: { label: "View All Products", href: "/products" },
   },
   features: {
     eyebrow: "KEY FEATURES",
-    heading: "Built for the counter, not the demo floor.",
+    heading: "Scanners matched to the read, not just the price.",
     description:
-      "Every setup is sized and configured for the checkout flow it's actually running.",
+      "Every unit is selected for the labels, distance, and pace it actually needs to handle.",
     items: [
       {
-        id: "terminals",
-        title: "Touchscreen Terminals",
+        id: "symbology",
+        title: "1D & 2D Scanning",
         description:
-          "All-in-one or modular setups sized to your counter space and order volume.",
-        icon: "terminals",
+          "From simple barcodes to QR codes and damaged labels, read reliably the first time.",
+        icon: "symbology",
       },
       {
-        id: "readers",
-        title: "Card & Contactless Readers",
+        id: "form-factor",
+        title: "Handheld & Fixed-Mount",
         description:
-          "EMV, tap-to-pay, and mobile wallet support built in, not bolted on.",
-        icon: "readers",
+          "Corded, cordless, or fixed-mount units built for the station they're working at.",
+        icon: "form-factor",
       },
       {
-        id: "peripherals",
-        title: "Cash Drawers & Peripherals",
+        id: "wireless",
+        title: "Wireless & Bluetooth",
         description:
-          "Drawers, customer displays, and scales matched to your checkout flow.",
-        icon: "peripherals",
+          "Cordless scanning with reliable range across the counter or the warehouse floor.",
+        icon: "wireless",
       },
       {
-        id: "multi-location",
-        title: "Multi-Location Ready",
+        id: "rugged",
+        title: "Rugged Options",
         description:
-          "Configurations that stay consistent across every register and every branch.",
-        icon: "multi-location",
+          "Drop- and dust-rated units for warehouses, loading docks, and outdoor use.",
+        icon: "rugged",
       },
     ],
   },
   useCases: {
     eyebrow: "WHERE IT'S USED",
-    heading: "Configured differently at every counter.",
+    heading: "Set up differently at every station.",
     description:
-      "The same hardware line, set up around how each checkout actually runs.",
+      "The same scanning technology, configured around where it actually works.",
     items: [
       {
         id: "retail",
         step: "01",
         title: "Retail Checkout",
-        description: "Fast, reliable checkout built for peak-hour lines.",
+        description:
+          "Fast, accurate scans at the register, even on damaged or curved labels.",
         icon: "retail",
       },
       {
-        id: "hospitality",
+        id: "warehousing",
         step: "02",
-        title: "Hospitality & F&B",
-        description: "Order-taking, split checks, and kitchen printer routing.",
-        icon: "hospitality",
-      },
-      {
-        id: "quick-service",
-        step: "03",
-        title: "Quick-Service Counters",
+        title: "Warehousing & Receiving",
         description:
-          "Streamlined single-screen setups for high-turnover counters.",
-        icon: "quick-service",
+          "High-volume scanning for receiving, put-away, and cycle counts.",
+        icon: "warehousing",
       },
       {
-        id: "multi-location",
+        id: "field-service",
+        step: "03",
+        title: "Field Service",
+        description:
+          "Portable scanning for deliveries, inspections, and on-site inventory checks.",
+        icon: "field-service",
+      },
+      {
+        id: "manufacturing",
         step: "04",
-        title: "Multi-Location Retail",
-        description: "Centralized reporting across every register you run.",
-        icon: "multi-location",
+        title: "Manufacturing",
+        description:
+          "Fixed-mount scanning integrated into production and packing lines.",
+        icon: "manufacturing",
       },
     ],
   },
   included: {
     eyebrow: "WHAT'S INCLUDED",
-    heading: "The terminal is the visible part.",
+    heading: "The scanner is only as good as what it's connected to.",
     description:
-      "Every POS hardware deployment includes what it takes to make it work on day one.",
+      "Every scanner deployment includes what it takes to get accurate reads into your system.",
     points: [
       {
-        id: "config",
-        title: "Software configuration",
+        id: "pairing",
+        title: "System pairing",
         description:
-          "Terminals configured and connected to your POS software before they reach the counter.",
+          "Scanners paired and tested with your POS, WMS, or inventory software before go-live.",
       },
       {
-        id: "payments",
-        title: "Payment processor setup",
+        id: "configuration",
+        title: "Symbology configuration",
         description:
-          "Card readers paired and tested with your payment processor, not left for you to figure out.",
+          "Set up to read the exact barcode formats your business actually uses.",
       },
       {
         id: "training",
         title: "Staff training",
         description:
-          "Your team walked through the hardware before it goes live at the register.",
+          "Your team shown how to get a clean scan the first time, every time.",
       },
     ],
   },
   closing: {
-    heading: "Setting up a new register?",
+    heading: "Scanning slowing your team down?",
     description:
-      "Tell us your checkout flow and volume — we'll spec the right terminal setup.",
+      "Tell us your volume and environment — we'll spec the right scanner setup.",
     primaryCta: { label: "Request a Quote", href: "/services/consultation" },
     secondaryCta: { label: "View All Products", href: "/products" },
   },
@@ -202,10 +203,10 @@ const featureIcons: Record<
   FeatureIconKey,
   React.ComponentType<{ className?: string }>
 > = {
-  terminals: Monitor,
-  readers: CreditCard,
-  peripherals: Package,
-  "multi-location": Store,
+  symbology: ScanLine,
+  "form-factor": Layers,
+  wireless: Wifi,
+  rugged: ShieldCheck,
 };
 
 const useCaseIcons: Record<
@@ -213,9 +214,9 @@ const useCaseIcons: Record<
   React.ComponentType<{ className?: string }>
 > = {
   retail: Store,
-  hospitality: Utensils,
-  "quick-service": Timer,
-  "multi-location": MapPin,
+  warehousing: Warehouse,
+  "field-service": Wrench,
+  manufacturing: Factory,
 };
 
 const containerVariants: Variants = {
@@ -228,8 +229,8 @@ const itemVariants: Variants = {
   show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" } },
 };
 
-export function PosHardwarePage() {
-  const content = posHardwareContent;
+export function BarCodeScannersPage() {
+  const content = barcodeScannersContent;
 
   return (
     <>
@@ -314,7 +315,7 @@ function ProductHeroSection({ hero }: { hero: ProductHero }) {
 function FeaturesSection({
   section,
 }: {
-  section: PosHardwareContent["features"];
+  section: BarcodeScannersContent["features"];
 }) {
   return (
     <section className="bg-muted/40 py-20 lg:py-24">
@@ -357,7 +358,7 @@ function FeaturesSection({
 function UseCasesSection({
   section,
 }: {
-  section: PosHardwareContent["useCases"];
+  section: BarcodeScannersContent["useCases"];
 }) {
   return (
     <section className="bg-background py-20 lg:py-24">
@@ -405,7 +406,7 @@ function UseCasesSection({
 function IncludedSection({
   section,
 }: {
-  section: PosHardwareContent["included"];
+  section: BarcodeScannersContent["included"];
 }) {
   return (
     <section className="bg-muted/40 py-20 lg:py-24">
