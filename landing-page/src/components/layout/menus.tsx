@@ -14,6 +14,11 @@ import {
   RefreshCw,
   ClipboardList,
   LifeBuoy,
+  Radio,
+  Cpu,
+  Printer,
+  ScanLine,
+  Network,
 } from 'lucide-react';
 
 // --- Submenu definitions for IT Solutions ---
@@ -74,35 +79,48 @@ const servicesSubMenus = [
 
 const productSubMenus = [
   {
-    title: 'All Products',
-    href: '/products',
+    title: "All Products",
+    href: "/products",
     description:
-      'We also offer various IT Products to cater to your business needs',
+      "We also offer various IT Products to cater to your business needs",
     icon: Briefcase,
   },
   {
-    title: 'Industrial Mobile Devices',
-    href: '/products/industrial-mobile-devices',
-    description: 'Mobile devices for inventory management',
+    title: "Industrial Mobile Devices",
+    href: "/products/industrial-mobile-devices",
+    description: "Mobile devices for inventory management",
     icon: Smartphone,
   },
   {
-    title: 'RFID Stickers',
-    href: '/products/rfid-stickers',
-    description: 'RFID tracking solutions',
-    icon: Code2,
+    title: "RFID Stickers",
+    href: "/products/rfid-stickers",
+    description: "RFID tracking solutions",
+    icon: Radio,
   },
   {
-    title: 'Printers',
-    href: '/products/printers',
-    description: 'Industrial grade printers',
-    icon: Settings,
+    title: "POS Hardware",
+    href: "/products/pos-hardware",
+    description: "Point of Sale hardware solutions",
+    icon: Cpu,
   },
   {
-    title: 'POS Hardware',
-    href: '/products/pos-hardware',
-    description: 'Point of Sale hardware solutions',
-    icon: Briefcase,
+    title: "Printers",
+    href: "/products/printers",
+    description: "Industrial grade printers",
+    icon: Printer,
+  },
+  {
+    title: "Barcode Scanners",
+    href: "/products/barcode-scanners",
+    description: "Scanning devices for retail and warehousing",
+    icon: ScanLine,
+  },
+  {
+    title: "Networking Equipment",
+    href: "/products/networking-equipment",
+    description:
+      "Switches, access points, and cabling to keep everything online",
+    icon: Network,
   },
 ];
 
