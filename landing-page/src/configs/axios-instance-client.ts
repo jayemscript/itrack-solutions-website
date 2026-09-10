@@ -1,160 +1,216 @@
-//src/configs/axiosClientInstance-private.ts
-
-'use client';
 import axios, {
   AxiosError,
   AxiosRequestConfig,
   AxiosResponse,
   AxiosRequestHeaders,
-} from 'axios';
-import { API_BASE_URL } from './different-domain-config';
-import { memoryToken } from '@/utils/memory-token';
-import Cookies from 'js-cookie';
+} from "axios";
+import { API_BASE_URL } from "./domain-config";
+import { memoryToken } from "@/utils/memory-token";
+import Cookies from "js-cookie";
+import { TAuthFullResponse } from "@/interfaces/auth";
+import { AUTH_BASEURL, AUTH_ENDPOINTS } from "@/configs/auth";
 
-// Extend Axios config for retry logic
+// ─── Types ────────────────────────────────────────────────────────────────────
+
 interface CustomRequestConfig extends AxiosRequestConfig {
   _retry?: boolean;
+  public?: boolean;
 }
 
-// Backend error shape
+declare module "axios" {
+  interface AxiosRequestConfig {
+    /** Skip authentication restore, Authorization headers, and 401 refresh handling. */
+    public?: boolean;
+  }
+}
+
 interface AxiosErrorResponse {
   message?: string | string[] | { message?: string };
 }
+
+// ─── Refresh Queue ────────────────────────────────────────────────────────────
+// Ensures only ONE refresh request fires at a time.
+// All concurrent 401s subscribe to the same promise and get the resolved token.
+
+let refreshPromise: Promise<string | null> | null = null;
+
+// ─── Axios Instance ───────────────────────────────────────────────────────────
 
 const axiosClientInstance = axios.create({
   baseURL: API_BASE_URL,
   withCredentials: true,
 });
 
-// Immediately try to refresh token if memoryToken is empty
-(async () => {
-  if (typeof window !== 'undefined') {
-    if (!memoryToken.get()) {
-      try {
-        const res = await axiosClientInstance.post<{ accessToken: string }>(
-          '/auth/refresh',
-          {},
-          { withCredentials: true },
-        );
+// ─── Auth Routes ──────────────────────────────────────────────────────────────
 
-        if (res.data.accessToken) {
-          memoryToken.set(res.data.accessToken);
-        }
-      } catch (err) {
-        console.warn('Auto-refresh failed:', err);
-        memoryToken.clear();
+const SESSION_BOOTSTRAP_ROUTES = [
+  `${AUTH_BASEURL}${AUTH_ENDPOINTS.REFRESH}`,
+  `${AUTH_BASEURL}${AUTH_ENDPOINTS.LOGIN}`,
+  `${AUTH_BASEURL}${AUTH_ENDPOINTS.REGISTER}`,
+];
+
+const isSessionBootstrapRoute = (url = ""): boolean => {
+  const pathname = `/${url
+    .split("?")[0]
+    .replace(/^\/+/, "")
+    .replace(/\/+$/, "")}`;
+  return SESSION_BOOTSTRAP_ROUTES.some((path) => pathname.endsWith(path));
+};
+
+// ─── Shared Refresh Logic ─────────────────────────────────────────────────────
+// Returns the new access token, or null on failure.
+// If a refresh is already in-flight, queues the caller instead of firing again.
+
+async function performRefresh(): Promise<string | null> {
+  if (refreshPromise) return refreshPromise;
+
+  refreshPromise = (async () => {
+    const ownsRefreshLock = memoryToken.acquireRefreshLock();
+    if (!ownsRefreshLock) {
+      return memoryToken.waitForRefreshResult();
+    }
+
+    try {
+      const response = await axiosClientInstance.post<TAuthFullResponse>(
+        `${AUTH_BASEURL}${AUTH_ENDPOINTS.REFRESH}`,
+        {},
+        { withCredentials: true },
+      );
+      const accessToken = response.data.data.accessToken;
+
+      if (!accessToken) return null;
+
+      memoryToken.set(accessToken, true);
+      return accessToken;
+    } catch (error) {
+      console.error("Token refresh failed:", error);
+      memoryToken.clear(true);
+      return null;
+    } finally {
+      memoryToken.releaseRefreshLock();
+      refreshPromise = null;
+    }
+  })();
+
+  return refreshPromise;
+}
+
+// ─── Boot: Restore Token on Page Load ────────────────────────────────────────
+// Runs once per tab. If this tab has no token yet, try to restore it via
+// the HTTP-only refresh cookie. The lock and BroadcastChannel coordinate this
+// across tabs so one refresh token is consumed by only one request.
+
+// (async () => {
+//   if (typeof window !== "undefined" && !memoryToken.get()) {
+//     await performRefresh();
+//   }
+// })();
+
+// ─── Request Interceptor ──────────────────────────────────────────────────────
+
+axiosClientInstance.interceptors.request.use(async (config) => {
+  let token = memoryToken.get();
+  config.headers = config.headers || ({} as AxiosRequestHeaders);
+
+  const url = config.url ?? "";
+  const method = config.method?.toUpperCase() ?? "";
+  const isPublicRequest = config.public === true;
+  const isSessionBootstrapRequest = isSessionBootstrapRoute(url);
+
+  // Never send a protected request without first restoring the in-memory token.
+  if (!isPublicRequest && !isSessionBootstrapRequest && !token) {
+    token = await performRefresh();
+
+    if (!token) {
+      if (typeof window !== "undefined") {
+        window.dispatchEvent(new Event("auth:logout"));
       }
+
+      throw new AxiosError(
+        "Unable to restore authentication session",
+        "ERR_AUTH_SESSION",
+        config,
+      );
     }
   }
-})();
 
-/*
-axiosClientInstance.interceptors.request.use((config) => {
-  const token = memoryToken.get();
-  config.headers = config.headers || ({} as AxiosRequestHeaders);
-
-  if (token) {
-    config.headers['Authorization'] = `Bearer ${token}`;
-  }
-
-  const xsrfToken = Cookies.get('XSRF-TOKEN');
-  if (xsrfToken) {
-    config.headers['X-XSRF-TOKEN'] = xsrfToken;
-  }
-
-  config.withCredentials = true;
-
-  return config;
-});
-*/
-
-axiosClientInstance.interceptors.request.use((config) => {
-  const token = memoryToken.get();
-  config.headers = config.headers || ({} as AxiosRequestHeaders);
-
-  const url = config.url || '';
-  const method = config.method?.toUpperCase();
-
-  const authRoutes = [
-    '/auth/refresh',
-    '/auth/check',
-    '/auth/sign-in',
-
-    '/auth/logout',
-    '/auth/verify-passkey',
-    '/auth/register',
-  ];
-
-  const isAuthRoute = authRoutes.some((path) => url.includes(path));
-
-  if (token) {
-    config.headers['Authorization'] = `Bearer ${token}`;
+  if (!isPublicRequest && !isSessionBootstrapRequest && token) {
+    config.headers["Authorization"] = `Bearer ${token}`;
   }
 
   if (
-    !isAuthRoute &&
-    ['POST', 'PUT', 'PATCH', 'DELETE'].includes(method || '')
+    !isPublicRequest &&
+    !isSessionBootstrapRequest &&
+    ["POST", "PUT", "PATCH", "DELETE"].includes(method)
   ) {
-    const xsrfToken = Cookies.get('XSRF-TOKEN');
+    const xsrfToken = Cookies.get("XSRF-TOKEN");
     if (xsrfToken) {
-      config.headers['X-XSRF-TOKEN'] = xsrfToken;
+      config.headers["X-XSRF-TOKEN"] = xsrfToken;
     }
   }
 
-  config.withCredentials = true;
+  if (typeof config.withCredentials !== "boolean") {
+    config.withCredentials = isSessionBootstrapRequest || !isPublicRequest;
+  }
   return config;
 });
 
-// Response interceptor to handle errors and refresh token
+// ─── Response Interceptor ─────────────────────────────────────────────────────
+
 axiosClientInstance.interceptors.response.use(
   (response: AxiosResponse) => response,
+
   async (error: unknown) => {
     if (!(error instanceof AxiosError)) {
-      console.error('Unexpected error:', error);
+      console.error("Unexpected error:", error);
       return Promise.reject(error);
     }
 
-    const axiosError = error as AxiosError;
-    const originalRequest = axiosError.config as CustomRequestConfig;
+    const originalRequest = error.config as CustomRequestConfig;
 
-    // Normalize backend error message
-    const data = axiosError.response?.data as AxiosErrorResponse | undefined;
+    // Normalize error message from backend
+    const data = error.response?.data as AxiosErrorResponse | undefined;
     let errMsg: string;
-    if (typeof data?.message === 'string') errMsg = data.message;
-    else if (Array.isArray(data?.message)) errMsg = data.message.join(', ');
-    else if (typeof data?.message === 'object' && data.message?.message)
+    if (typeof data?.message === "string") errMsg = data.message;
+    else if (Array.isArray(data?.message)) errMsg = data.message.join(", ");
+    else if (typeof data?.message === "object" && data.message?.message)
       errMsg = data.message.message;
-    else errMsg = axiosError.message || 'Server Error';
+    else errMsg = error.message || "Server Error";
 
-    console.error('API Error:', errMsg);
+    console.error("API Error:", errMsg);
 
-    // Auto-refresh token if 401 and not already retried and not the refresh endpoint itself
+    const is401 = error.response?.status === 401;
+    const alreadyRetried = originalRequest._retry;
+    const isSessionBootstrapRequest = isSessionBootstrapRoute(
+      originalRequest.url,
+    );
+    const isPublicRequest = originalRequest.public === true;
+
     if (
-      axiosError.response?.status === 401 &&
-      !originalRequest._retry &&
-      !originalRequest.url?.includes('/auth/refresh')
+      is401 &&
+      !alreadyRetried &&
+      !isSessionBootstrapRequest &&
+      !isPublicRequest
     ) {
       originalRequest._retry = true;
-      try {
-        const res = await axiosClientInstance.post<{ accessToken: string }>(
-          '/auth/refresh',
-          {},
-          { withCredentials: true },
-        );
-        const { accessToken } = res.data;
-        if (accessToken) {
-          memoryToken.set(accessToken);
-          originalRequest.headers = originalRequest.headers || {};
-          originalRequest.headers['Authorization'] = `Bearer ${accessToken}`;
-          return axiosClientInstance(originalRequest);
-        }
-      } catch (refreshError) {
-        console.error('Refresh token failed:', refreshError);
-        memoryToken.clear();
+
+      // performRefresh() is queue-aware:
+      // - First caller fires the real request
+      // - All other concurrent 401s simply await the same promise
+      const newToken = await performRefresh();
+
+      if (newToken) {
+        originalRequest.headers = originalRequest.headers ?? {};
+        originalRequest.headers["Authorization"] = `Bearer ${newToken}`;
+        return axiosClientInstance(originalRequest);
+      }
+
+      // Refresh failed — redirect to login or dispatch a logout event
+      if (typeof window !== "undefined") {
+        window.dispatchEvent(new Event("auth:logout"));
       }
     }
 
-    // return Promise.reject(new Error(errMsg));
     return Promise.reject(error);
   },
 );
