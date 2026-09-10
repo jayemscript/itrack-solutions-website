@@ -47,14 +47,14 @@ const CONTACT_CHANNELS: ContactChannel[] = [
     id: "email",
     icon: Mail,
     label: "Email",
-    value: "hello@itracksolutions.com",
-    href: "mailto:hello@itracksolutions.com",
+    value: "ramil@itrackphils.com",
+    href: "mailto:ramil@itrackphils.com",
   },
   {
     id: "office",
     icon: MapPin,
     label: "Office",
-    value: "Tandang Sora, NCR, Metro Manila Quezon City Philipppines",
+    value: "3A Peaceful lane, Sanville, Culiat, Tandang Sora Qcity",
   },
   {
     id: "hours",
