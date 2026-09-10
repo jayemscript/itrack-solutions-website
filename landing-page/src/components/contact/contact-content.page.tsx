@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { Button, Input, Label, Textarea } from "@/components/ui";
+import { extractErrorMessage } from "@/configs/api.helper";
+import useCreateInquiriesContact from "@/hooks/inquiries/use-create-inquiries-contact";
 import { motion, type Variants } from "framer-motion";
 import { ArrowRight, Clock, Mail, MapPin, PhoneCall } from "lucide-react";
 
@@ -258,15 +260,35 @@ function ContactForm() {
   const [formState, setFormState] =
     useState<ContactFormState>(INITIAL_FORM_STATE);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const { createInquiry, error, isLoading } = useCreateInquiriesContact();
 
   const updateField = (field: keyof ContactFormState, value: string) => {
     setFormState((prev) => ({ ...prev, [field]: value }));
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setIsSubmitted(true);
+
+    try {
+      await createInquiry({
+        fullname: formState.name,
+        email: formState.email,
+        phone: formState.phone || undefined,
+        company: formState.company || undefined,
+        context: formState.topic,
+        message: formState.message,
+      });
+      setIsSubmitted(true);
+    } catch {
+      // The hook stores the original error for the message shown below.
+    }
   };
+
+  const errorMessage = error ? extractErrorMessage(error) : "";
+  const displayedErrorMessage =
+    errorMessage && errorMessage !== "Unknown error"
+      ? errorMessage
+      : "We couldn't send your message. Please try again.";
 
   if (isSubmitted) {
     return (
@@ -379,9 +401,20 @@ function ContactForm() {
         </div>
       </div>
 
-      <Button type="submit" size="lg" className="mt-6 w-full sm:w-auto">
+      {error && (
+        <p className="mt-4 text-sm text-destructive" role="alert">
+          {displayedErrorMessage}
+        </p>
+      )}
+
+      <Button
+        type="submit"
+        size="lg"
+        className="mt-6 w-full sm:w-auto"
+        disabled={isLoading}
+      >
         <span className="inline-flex items-center gap-2">
-          Send Message
+          {isLoading ? "Sending..." : "Send Message"}
           <ArrowRight className="h-4 w-4" />
         </span>
       </Button>

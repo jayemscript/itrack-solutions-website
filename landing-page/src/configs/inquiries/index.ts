@@ -1,0 +1,6 @@
+const INQUIRIES_BASEURL = "/inquiries";
+const INQUIRIES_ENDPOINTS = {
+  CREATE: "/",
+};
+
+export { INQUIRIES_BASEURL, INQUIRIES_ENDPOINTS };

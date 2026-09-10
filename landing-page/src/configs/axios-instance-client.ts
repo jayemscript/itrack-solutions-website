@@ -14,13 +14,13 @@ import { AUTH_BASEURL, AUTH_ENDPOINTS } from "@/configs/auth";
 
 interface CustomRequestConfig extends AxiosRequestConfig {
   _retry?: boolean;
-  public?: boolean;
+  access?: "public" | "protected";
 }
 
 declare module "axios" {
   interface AxiosRequestConfig {
-    /** Skip authentication restore, Authorization headers, and 401 refresh handling. */
-    public?: boolean;
+    /** Controls whether the request uses the authentication interceptors. */
+    access?: "public" | "protected";
   }
 }
 
@@ -43,18 +43,18 @@ const axiosClientInstance = axios.create({
 
 // ─── Auth Routes ──────────────────────────────────────────────────────────────
 
-const SESSION_BOOTSTRAP_ROUTES = [
+const TOKENLESS_AUTH_ROUTES = [
   `${AUTH_BASEURL}${AUTH_ENDPOINTS.REFRESH}`,
   `${AUTH_BASEURL}${AUTH_ENDPOINTS.LOGIN}`,
   `${AUTH_BASEURL}${AUTH_ENDPOINTS.REGISTER}`,
 ];
 
-const isSessionBootstrapRoute = (url = ""): boolean => {
+const isTokenlessAuthRoute = (url = ""): boolean => {
   const pathname = `/${url
     .split("?")[0]
     .replace(/^\/+/, "")
     .replace(/\/+$/, "")}`;
-  return SESSION_BOOTSTRAP_ROUTES.some((path) => pathname.endsWith(path));
+  return TOKENLESS_AUTH_ROUTES.some((path) => pathname.endsWith(path));
 };
 
 // ─── Shared Refresh Logic ─────────────────────────────────────────────────────
@@ -114,11 +114,11 @@ axiosClientInstance.interceptors.request.use(async (config) => {
 
   const url = config.url ?? "";
   const method = config.method?.toUpperCase() ?? "";
-  const isPublicRequest = config.public === true;
-  const isSessionBootstrapRequest = isSessionBootstrapRoute(url);
+  const isProtectedRequest = config.access !== "public";
+  const isTokenlessAuthRequest = isTokenlessAuthRoute(url);
 
   // Never send a protected request without first restoring the in-memory token.
-  if (!isPublicRequest && !isSessionBootstrapRequest && !token) {
+  if (isProtectedRequest && !isTokenlessAuthRequest && !token) {
     token = await performRefresh();
 
     if (!token) {
@@ -134,13 +134,13 @@ axiosClientInstance.interceptors.request.use(async (config) => {
     }
   }
 
-  if (!isPublicRequest && !isSessionBootstrapRequest && token) {
+  if (isProtectedRequest && !isTokenlessAuthRequest && token) {
     config.headers["Authorization"] = `Bearer ${token}`;
   }
 
   if (
-    !isPublicRequest &&
-    !isSessionBootstrapRequest &&
+    isProtectedRequest &&
+    !isTokenlessAuthRequest &&
     ["POST", "PUT", "PATCH", "DELETE"].includes(method)
   ) {
     const xsrfToken = Cookies.get("XSRF-TOKEN");
@@ -149,9 +149,7 @@ axiosClientInstance.interceptors.request.use(async (config) => {
     }
   }
 
-  if (typeof config.withCredentials !== "boolean") {
-    config.withCredentials = isSessionBootstrapRequest || !isPublicRequest;
-  }
+  config.withCredentials = isTokenlessAuthRequest || isProtectedRequest;
   return config;
 });
 
@@ -181,16 +179,14 @@ axiosClientInstance.interceptors.response.use(
 
     const is401 = error.response?.status === 401;
     const alreadyRetried = originalRequest._retry;
-    const isSessionBootstrapRequest = isSessionBootstrapRoute(
-      originalRequest.url,
-    );
-    const isPublicRequest = originalRequest.public === true;
+    const isTokenlessAuthRequest = isTokenlessAuthRoute(originalRequest.url);
+    const isProtectedRequest = originalRequest.access !== "public";
 
     if (
       is401 &&
       !alreadyRetried &&
-      !isSessionBootstrapRequest &&
-      !isPublicRequest
+      !isTokenlessAuthRequest &&
+      isProtectedRequest
     ) {
       originalRequest._retry = true;
 
