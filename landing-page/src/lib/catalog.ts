@@ -80,10 +80,20 @@ export async function getServiceCatalogPage(
 
 export async function getProductCatalogByCode(code: string) {
   const page = await getProductCatalogPage({ page: 1, limit: 100 });
-  return page?.items.find((item) => item.code === code || catalogSlug(item.name) === code || catalogSlug(item.category) === code) ?? null;
+  const item = page?.items.find((entry) => entry.code === code || catalogSlug(entry.name) === code || catalogSlug(entry.category) === code) ?? null;
+  if (!item) return null;
+  return {
+    item,
+    relatedItems: page?.items.filter((entry) => entry.category === item.category) ?? [],
+  };
 }
 
 export async function getServiceCatalogByCode(code: string) {
   const page = await getServiceCatalogPage({ page: 1, limit: 100 });
-  return page?.items.find((item) => item.code === code || catalogSlug(item.name) === code || catalogSlug(item.category) === code) ?? null;
+  const item = page?.items.find((entry) => entry.code === code || catalogSlug(entry.name) === code || catalogSlug(entry.category) === code) ?? null;
+  if (!item) return null;
+  return {
+    item,
+    relatedItems: page?.items.filter((entry) => entry.category === item.category) ?? [],
+  };
 }

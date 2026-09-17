@@ -6,7 +6,7 @@ export const revalidate = 60;
 
 export default async function ServiceCatalogPage({ params }: { params: Promise<{ code: string }> }) {
   const { code } = await params;
-  const item = await getServiceCatalogByCode(decodeURIComponent(code));
-  if (!item) notFound();
-  return <CatalogDetail item={item} kind="service" />;
+  const catalog = await getServiceCatalogByCode(decodeURIComponent(code));
+  if (!catalog) notFound();
+  return <CatalogDetail item={catalog.item} relatedItems={catalog.relatedItems} kind="service" />;
 }

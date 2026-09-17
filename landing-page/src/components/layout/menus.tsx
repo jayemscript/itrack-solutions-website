@@ -15,11 +15,13 @@ import {
   ClipboardList,
   LifeBuoy,
   Radio,
-  Cpu,
   Printer,
   ScanLine,
-  Network,
 } from 'lucide-react';
+import {
+  PRODUCT_CATALOG_CODES,
+  SERVICE_CATALOG_CODES,
+} from '@/interfaces/constants/catalog';
 
 // --- Submenu definitions for IT Solutions ---
 
@@ -47,31 +49,31 @@ const servicesSubMenus = [
   },
   {
     title: "Custom Development",
-    href: "/services/custom-development",
+    href: `/services/${SERVICE_CATALOG_CODES.CUSTOMIZE_SYSTEM}`,
     description: "Tailored software solutions",
     icon: Code2,
   },
   {
     title: "Mobile Apps",
-    href: "/services/mobile-apps",
+    href: `/services/${SERVICE_CATALOG_CODES.MOBILE_APPS}`,
     description: "Mobile App development",
     icon: Smartphone,
   },
   {
     title: "Legacy Migration",
-    href: "/services/migration",
+    href: `/services/${SERVICE_CATALOG_CODES.LEGACY_MIGRATION}`,
     description: "Modernize aging systems",
     icon: RefreshCw,
   },
   {
     title: "Consultation",
-    href: "/services/consultation",
+    href: `/services/${SERVICE_CATALOG_CODES.CONSULTATION}`,
     description: "Project scoping & technical audits",
     icon: ClipboardList,
   },
   {
     title: "Support & Maintenance",
-    href: "/services/support",
+    href: `/services/${SERVICE_CATALOG_CODES.SUPPORT_AND_MAINTENANCE}`,
     description: "Ongoing fixes & monitoring",
     icon: LifeBuoy,
   },
@@ -86,41 +88,46 @@ const productSubMenus = [
     icon: Briefcase,
   },
   {
-    title: "Industrial Mobile Devices",
-    href: "/products/industrial-mobile-devices",
+    title: "Mobile Computers",
+    href: `/products/${PRODUCT_CATALOG_CODES.MOBILE_COMPUTERS}`,
     description: "Mobile devices for inventory management",
     icon: Smartphone,
   },
   {
-    title: "RFID Stickers",
-    href: "/products/rfid-stickers",
-    description: "RFID tracking solutions",
-    icon: Radio,
-  },
-  {
-    title: "POS Hardware",
-    href: "/products/pos-hardware",
-    description: "Point of Sale hardware solutions",
-    icon: Cpu,
-  },
-  {
-    title: "Printers",
-    href: "/products/printers",
-    description: "Industrial grade printers",
-    icon: Printer,
-  },
-  {
     title: "Barcode Scanners",
-    href: "/products/barcode-scanners",
+    href: `/products/${PRODUCT_CATALOG_CODES.BARCODE_SCANNERS}`,
     description: "Scanning devices for retail and warehousing",
     icon: ScanLine,
   },
   {
-    title: "Networking Equipment",
-    href: "/products/networking-equipment",
-    description:
-      "Switches, access points, and cabling to keep everything online",
-    icon: Network,
+    title: "Barcode Printers",
+    href: `/products/${PRODUCT_CATALOG_CODES.BARCODE_PRINTERS}`,
+    description: "Industrial label printing solutions",
+    icon: Printer,
+  },
+  {
+    title: "ID Printers",
+    href: `/products/${PRODUCT_CATALOG_CODES.ID_PRINTERS}`,
+    description: "Professional ID card printing solutions",
+    icon: Printer,
+  },
+  {
+    title: "Security Cameras",
+    href: `/products/${PRODUCT_CATALOG_CODES.SECURITY_CAMERAS}`,
+    description: "Business security and monitoring solutions",
+    icon: Shield,
+  },
+  {
+    title: "Consumables",
+    href: `/products/${PRODUCT_CATALOG_CODES.CONSUMABLES}`,
+    description: "Labels, ribbons, receipt rolls, and supplies",
+    icon: Briefcase,
+  },
+  {
+    title: "RFID Readers & Tags",
+    href: `/products/${PRODUCT_CATALOG_CODES.RFID_READERS_AND_TAGS}`,
+    description: "RFID tracking solutions",
+    icon: Radio,
   },
 ];
 

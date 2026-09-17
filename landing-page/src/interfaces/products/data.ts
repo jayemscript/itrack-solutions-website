@@ -7,6 +7,7 @@ export interface IProductCatalogs extends BaseFields {
   description: string;
   sortOrder: number;
   isActive: boolean;
+  images?: IProductCatalogImage[];
 }
 
 export interface IProductCatalogImage extends BaseFields {
