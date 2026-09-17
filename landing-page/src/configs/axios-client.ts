@@ -14,13 +14,13 @@ import { AUTH_BASEURL, AUTH_ENDPOINTS } from "@/configs/auth";
 
 interface CustomRequestConfig extends AxiosRequestConfig {
   _retry?: boolean;
-  access?: "public" | "protected";
+  public?: boolean;
 }
 
 declare module "axios" {
   interface AxiosRequestConfig {
-    /** Controls whether the request uses the authentication interceptors. */
-    access?: "public" | "protected";
+    /** Skip authentication restore, Authorization headers, and 401 refresh handling. */
+    public?: boolean;
   }
 }
 
@@ -114,11 +114,11 @@ axiosClientInstance.interceptors.request.use(async (config) => {
 
   const url = config.url ?? "";
   const method = config.method?.toUpperCase() ?? "";
-  const isProtectedRequest = config.access !== "public";
+  const isPublicRequest = config.public === true;
   const isTokenlessAuthRequest = isTokenlessAuthRoute(url);
 
   // Never send a protected request without first restoring the in-memory token.
-  if (isProtectedRequest && !isTokenlessAuthRequest && !token) {
+  if (!isPublicRequest && !isTokenlessAuthRequest && !token) {
     token = await performRefresh();
 
     if (!token) {
@@ -134,12 +134,12 @@ axiosClientInstance.interceptors.request.use(async (config) => {
     }
   }
 
-  if (isProtectedRequest && !isTokenlessAuthRequest && token) {
+  if (!isPublicRequest && !isTokenlessAuthRequest && token) {
     config.headers["Authorization"] = `Bearer ${token}`;
   }
 
   if (
-    isProtectedRequest &&
+    !isPublicRequest &&
     !isTokenlessAuthRequest &&
     ["POST", "PUT", "PATCH", "DELETE"].includes(method)
   ) {
@@ -149,7 +149,7 @@ axiosClientInstance.interceptors.request.use(async (config) => {
     }
   }
 
-  config.withCredentials = isTokenlessAuthRequest || isProtectedRequest;
+  config.withCredentials = isTokenlessAuthRequest || !isPublicRequest;
   return config;
 });
 
@@ -180,13 +180,13 @@ axiosClientInstance.interceptors.response.use(
     const is401 = error.response?.status === 401;
     const alreadyRetried = originalRequest._retry;
     const isTokenlessAuthRequest = isTokenlessAuthRoute(originalRequest.url);
-    const isProtectedRequest = originalRequest.access !== "public";
+    const isPublicRequest = originalRequest.public === true;
 
     if (
       is401 &&
       !alreadyRetried &&
       !isTokenlessAuthRequest &&
-      isProtectedRequest
+      !isPublicRequest
     ) {
       originalRequest._retry = true;
 

@@ -1,4 +1,3 @@
-import '@/configs/setup-console';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono, Inter, Roboto, Bebas_Neue } from 'next/font/google';
 import './globals.css';

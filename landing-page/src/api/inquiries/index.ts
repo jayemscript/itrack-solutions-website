@@ -1,4 +1,4 @@
-import axios from "@/configs/axios-instance-client";
+import axios from "@/configs/axios-client";
 import { handleRequest } from "@/configs/api.helper";
 import { INQUIRIES_BASEURL, INQUIRIES_ENDPOINTS } from "@/configs/inquiries";
 import {
@@ -11,7 +11,7 @@ export function CreateInquiries(
 ): Promise<TCreateInquiriuesResponse> {
   return handleRequest(
     axios.post(`${INQUIRIES_BASEURL}${INQUIRIES_ENDPOINTS.CREATE}`, payload, {
-      access: "public",
+      public: true,
     }),
   );
 }

@@ -1,4 +1,4 @@
-import { ErrorResponseMessage } from "@/interfaces/shared-api.interface";
+import { ErrorResponseMessage } from "@/interfaces/common";
 import { AxiosError } from "axios";
 
 /*
@@ -15,8 +15,12 @@ export function extractErrorMessage(error: unknown): string {
       data?.message &&
       typeof data.message === "object" &&
       "message" in data.message
-    )
-      return data.message.message ?? "Unknown error";
+    ) {
+      const nested = data.message.message;
+      if (typeof nested === "string") return nested;
+      if (Array.isArray(nested)) return nested.join(", ");
+      return "Unknown error";
+    }
 
     return error.message;
   }
@@ -25,14 +29,14 @@ export function extractErrorMessage(error: unknown): string {
 }
 
 export async function handleRequest<T>(
-  request: Promise<{ data: T }>
+  request: Promise<{ data: T }>,
 ): Promise<T> {
   try {
     const response = await request;
     return response.data;
   } catch (error: unknown) {
     const message = extractErrorMessage(error);
-      console.error(message);
+    console.error(message);
     if (error instanceof AxiosError) throw error;
     throw new Error(message);
   }
