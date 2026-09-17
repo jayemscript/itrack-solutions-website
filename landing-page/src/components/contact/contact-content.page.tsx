@@ -56,7 +56,7 @@ const CONTACT_CHANNELS: ContactChannel[] = [
     id: "office",
     icon: MapPin,
     label: "Office",
-    value: "3A Peaceful lane, Sanville, Culiat, Tandang Sora Qcity",
+    value: "3A Peaceful lane, Sanville, Culiat, Tandang Sora Quezon City",
   },
   {
     id: "hours",

@@ -147,8 +147,7 @@ export default function Footer() {
               <li className="flex items-start space-x-3 text-sm">
                 <MapPin className="w-5 h-5 text-primary shrink-0 mt-0.5" />
                 <span className="text-muted-foreground">
-                  123 Tandang Sora, Culiat Quezon City, Metro Manila,
-                  Philippines
+                  3A Peaceful lane, Sanville, Culiat, Tandang Sora Quezon City
                 </span>
               </li>
               <li className="flex items-center space-x-3 text-sm">
@@ -163,10 +162,10 @@ export default function Footer() {
               <li className="flex items-center space-x-3 text-sm">
                 <Mail className="w-5 h-5 text-primary shrink-0" />
                 <a
-                  href="mailto:hello@itracksolutions.com"
+                  href="mailto:ramil@itrackphils.com"
                   className="text-muted-foreground hover:text-primary transition-colors"
                 >
-                  hello@itracksolutions.com
+                  ramil@itrackphils.com
                 </a>
               </li>
             </ul>
