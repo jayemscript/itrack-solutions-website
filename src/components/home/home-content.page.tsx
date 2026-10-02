@@ -1,6 +1,11 @@
 "use client";
 
-import { HomeHeroPage, HomeFeaturesPage, HomeWhyChooseUsPage } from "./index";
+import {
+  HomeHeroPage,
+  HomeClientsPage,
+  HomeFeaturesPage,
+  HomeWhyChooseUsPage,
+} from "./index";
 
 export function HomeContentPage() {
   return (
@@ -8,6 +13,7 @@ export function HomeContentPage() {
       <div>
         <HomeHeroPage />
       </div>
+      <HomeClientsPage />
       <div id="features">
         <HomeFeaturesPage />
       </div>
