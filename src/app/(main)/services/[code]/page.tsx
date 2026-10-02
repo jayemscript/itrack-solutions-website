@@ -1,12 +1,32 @@
 import { notFound } from "next/navigation";
-import { CatalogDetail } from "@/components/catalog/catalog-detail";
-import { getServiceCatalogByCode } from "@/lib/catalog";
+import {
+  ConsultationServicePage,
+  CustomDevelopmentPage,
+  MigrationServicePage,
+  MobileAppsPage,
+  SupportMaintenanceServicePage,
+} from "@/components/services";
 
-export const revalidate = 60;
+const servicePages = {
+  "custom-development": CustomDevelopmentPage,
+  "customize-system": CustomDevelopmentPage,
+  "web-development": CustomDevelopmentPage,
+  "mobile-apps": MobileAppsPage,
+  migration: MigrationServicePage,
+  "legacy-migration": MigrationServicePage,
+  consultation: ConsultationServicePage,
+  support: SupportMaintenanceServicePage,
+  "support-and-maintenance": SupportMaintenanceServicePage,
+};
 
-export default async function ServiceCatalogPage({ params }: { params: Promise<{ code: string }> }) {
+export default async function ServicePage({
+  params,
+}: {
+  params: Promise<{ code: string }>;
+}) {
   const { code } = await params;
-  const catalog = await getServiceCatalogByCode(decodeURIComponent(code));
-  if (!catalog) notFound();
-  return <CatalogDetail item={catalog.item} relatedItems={catalog.relatedItems} kind="service" />;
+  const Page = servicePages[decodeURIComponent(code) as keyof typeof servicePages];
+
+  if (!Page) notFound();
+  return <Page />;
 }

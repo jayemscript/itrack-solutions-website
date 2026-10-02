@@ -56,8 +56,15 @@ const homeHeroContent: HomeHeroContent = {
     lead: "We don't just sell hardware.",
     emphasis: "We engineer the system around it.",
   },
-  description:
-    "POS, RFID, self-service kiosks, scanners, printers, networking — Itrack Solutions INC designs, integrates, deploys, and supports the technology system your business actually runs on, not just the boxes it's made of.",
+  description: `We provides quality business solutions using
+Automatic Identification and Data Capture
+technology. ITRACK Solutions Inc. offers a diversified
+range of products to meet every requirements from
+barcode printers, barcode scanners, mobile
+computers, RFID solutions, CCTV, biometrics
+solutions, door access controllers, customized
+solutions, software solutions, thermal transfer
+ribbons, POS and consumables`,
   ctas: [
     {
       id: "consult",

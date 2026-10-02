@@ -1,22 +1,38 @@
 import { notFound } from "next/navigation";
-import { CatalogDetail } from "@/components/catalog/catalog-detail";
-import { getProductCatalogByCode } from "@/lib/catalog";
+import {
+  BarCodeScannersPage,
+  ConsumablesPage,
+  IndustrialMobileDevicePage,
+  NetworkingEquipmentPage,
+  PosHardwarePage,
+  ProductPrintersPage,
+  RFIDStickerPage,
+  SecurityCameraPage,
+} from "@/components/products";
 
-export const revalidate = 60;
+const productPages = {
+  "industrial-mobile-devices": IndustrialMobileDevicePage,
+  "mobile-computers": IndustrialMobileDevicePage,
+  "barcode-printers": ProductPrintersPage,
+  "id-printers": ProductPrintersPage,
+  "security-camera": SecurityCameraPage,
+  consumables: ConsumablesPage,
+  "rfid-readers-and-tags": RFIDStickerPage,
+  "rfid-stickers": RFIDStickerPage,
+  "pos-hardware": PosHardwarePage,
+  printers: ProductPrintersPage,
+  "barcode-scanners": BarCodeScannersPage,
+  "networking-equipment": NetworkingEquipmentPage,
+};
 
-export default async function ProductCatalogPage({
+export default async function ProductPage({
   params,
 }: {
   params: Promise<{ code: string }>;
 }) {
   const { code } = await params;
-  const catalog = await getProductCatalogByCode(decodeURIComponent(code));
-  if (!catalog) notFound();
-  return (
-    <CatalogDetail
-      item={catalog.item}
-      relatedItems={catalog.relatedItems}
-      kind="product"
-    />
-  );
+  const Page = productPages[decodeURIComponent(code) as keyof typeof productPages];
+
+  if (!Page) notFound();
+  return <Page />;
 }

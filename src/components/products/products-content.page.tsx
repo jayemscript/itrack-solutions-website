@@ -1,8 +1,7 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { GetAllProductsCatalogs } from "@/api/products";
 import { Badge, Button } from "@/components/ui";
 import { motion, type Variants } from "framer-motion";
 import {
@@ -15,22 +14,15 @@ import {
   ScanLine,
   Smartphone,
 } from "lucide-react";
-import { CatalogPagination } from "@/components/catalog/catalog-pagination";
-import type { CatalogPage } from "@/lib/catalog";
-import type {
-  IProductCatalogImage,
-  IProductCatalogs,
-} from "@/interfaces/products";
-import { CatalogHtml } from "@/components/catalog/catalog-html";
-import { CatalogImageCarousel } from "@/components/catalog/catalog-image-carousel";
 
 type ProductIconKey =
   | "mobile"
-  | "rfid"
-  | "pos"
-  | "printer"
   | "scanner"
-  | "network";
+  | "printer"
+  | "id-printer"
+  | "camera"
+  | "consumables"
+  | "rfid";
 interface ProductItem {
   id: string;
   title: string;
@@ -38,10 +30,10 @@ interface ProductItem {
   description: string;
   tags: string[];
   icon: ProductIconKey;
-  images: IProductCatalogImage[];
+  image: string;
 }
 
-const fallbackProducts: ProductItem[] = [
+const products: ProductItem[] = [
   {
     id: "industrial-mobile-devices",
     title: "Industrial Mobile Devices",
@@ -50,37 +42,7 @@ const fallbackProducts: ProductItem[] = [
       "Rugged handheld computers and wearables built for warehouses, field service, and factory floors.",
     tags: ["Rugged & drop-tested", "Android & Windows", "Long battery life"],
     icon: "mobile",
-    images: [],
-  },
-  {
-    id: "rfid-stickers",
-    title: "RFID Stickers & Tags",
-    href: "/products/rfid-stickers",
-    description:
-      "Passive and active RFID tags for inventory tracking, asset management, and loss prevention.",
-    tags: ["Inventory tracking", "Asset tags", "Bulk supply"],
-    icon: "rfid",
-    images: [],
-  },
-  {
-    id: "pos-hardware",
-    title: "POS Hardware",
-    href: "/products/pos-hardware",
-    description:
-      "Terminals, cash drawers, and card readers configured for retail and hospitality checkout.",
-    tags: ["Terminals", "Card readers", "Cash drawers"],
-    icon: "pos",
-    images: [],
-  },
-  {
-    id: "printers",
-    title: "Printers",
-    href: "/products/printers",
-    description:
-      "Receipt, label, and document printers integrated directly into your POS and business systems.",
-    tags: ["Receipt printers", "Label printers", "Thermal & inkjet"],
-    icon: "printer",
-    images: [],
+    image: "/images/mobile-computers.jpg",
   },
   {
     id: "barcode-scanners",
@@ -90,17 +52,57 @@ const fallbackProducts: ProductItem[] = [
       "Handheld and fixed-mount scanners matched to your throughput and environment.",
     tags: ["1D & 2D scanning", "Handheld & fixed-mount", "Wireless options"],
     icon: "scanner",
-    images: [],
+    image: "/images/barcode-scanners.jpg",
   },
   {
-    id: "networking-equipment",
-    title: "Networking Equipment",
-    href: "/products/networking-equipment",
+    id: "barcode-printers",
+    title: "Barcode Printers",
+    href: "/products/barcode-printers",
     description:
-      "Switches, access points, and cabling that keep every device online and secure.",
-    tags: ["Switches & routers", "Access points", "Structured cabling"],
-    icon: "network",
-    images: [],
+      "Reliable label and barcode printing for inventory, shipping, and retail workflows.",
+    tags: ["Label printing", "Thermal printers", "Barcode labels"],
+    icon: "printer",
+    image: "/images/barcode-printers.jpg",
+  },
+  {
+    id: "id-printers",
+    title: "ID Printers",
+    href: "/products/id-printers",
+    description:
+      "Card printers for employee badges, visitor passes, and membership IDs.",
+    tags: ["ID cards", "Badge printing", "Card supplies"],
+    icon: "id-printer",
+    image: "/images/id-printers.jpg",
+  },
+  {
+    id: "security-camera",
+    title: "Security Camera",
+    href: "/products/security-camera",
+    description:
+      "Business camera systems to help monitor facilities, work areas, and access points.",
+    tags: ["Site monitoring", "Camera systems", "Business security"],
+    icon: "camera",
+    image: "/images/security-camera.jpg",
+  },
+  {
+    id: "consumables",
+    title: "Consumables",
+    href: "/products/consumables",
+    description:
+      "Labels, ribbons, receipt rolls, and other supplies to keep daily operations running.",
+    tags: ["Labels", "Printer ribbons", "Receipt rolls"],
+    icon: "consumables",
+    image: "/images/consumables.jpg",
+  },
+  {
+    id: "rfid-readers-and-tags",
+    title: "RFID Readers & Tags",
+    href: "/products/rfid-readers-and-tags",
+    description:
+      "RFID readers and tags for inventory visibility, asset tracking, and operations.",
+    tags: ["RFID readers", "RFID tags", "Asset tracking"],
+    icon: "rfid",
+    image: "/images/rfid-tags.jpg",
   },
 ];
 
@@ -109,11 +111,12 @@ const productIcons: Record<
   React.ComponentType<{ className?: string }>
 > = {
   mobile: Smartphone,
-  rfid: Radio,
-  pos: Cpu,
-  printer: Printer,
   scanner: ScanLine,
-  network: Network,
+  printer: Printer,
+  "id-printer": Cpu,
+  camera: Network,
+  consumables: Cpu,
+  rfid: Radio,
 };
 const containerVariants: Variants = {
   hidden: {},
@@ -124,53 +127,7 @@ const cardVariants: Variants = {
   show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" } },
 };
 
-function apiProduct(item: IProductCatalogs): ProductItem {
-  const category = item.category.toLowerCase();
-  const icon: ProductIconKey = category.includes("mobile")
-    ? "mobile"
-    : category.includes("rfid")
-      ? "rfid"
-      : category.includes("printer")
-        ? "printer"
-        : category.includes("scanner")
-          ? "scanner"
-          : category.includes("network")
-            ? "network"
-            : "pos";
-  return {
-    id: item.id,
-    title: item.name,
-    href: `/products/${encodeURIComponent(item.code)}`,
-    description: item.description,
-    tags: [item.category],
-    icon,
-    images: item.images ?? [],
-  };
-}
-
-export function ProductsContentPage({
-  initialPage,
-}: {
-  initialPage?: CatalogPage<IProductCatalogs> | null;
-}) {
-  const [page, setPage] = useState<CatalogPage<IProductCatalogs> | null>(
-    initialPage ?? null,
-  );
-  useEffect(() => {
-    if (initialPage) return;
-    void GetAllProductsCatalogs({ page: 1, limit: 10 })
-      .then((response) => {
-        const data = response.data;
-        setPage({
-          items: data.product_catalogs,
-          totalItems: data.totalItems,
-          totalPages: data.totalPages,
-          currentPage: data.currentPage,
-        });
-      })
-      .catch(() => undefined);
-  }, [initialPage]);
-  const products = page?.items.map(apiProduct) ?? fallbackProducts;
+export function ProductsContentPage() {
   return (
     <section id="catalog" className="relative bg-background py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -205,9 +162,6 @@ export function ProductsContentPage({
             </motion.div>
           ))}
         </motion.div>
-        {page && (
-          <CatalogPagination page={page} onPage={setPage} kind="products" />
-        )}
         <div className="mt-16 flex flex-col items-start gap-6 rounded-2xl border border-primary/15 bg-primary px-7 py-8 sm:flex-row sm:items-center sm:justify-between sm:px-9">
           <div>
             <p className="text-xl font-semibold text-primary-foreground">
@@ -239,23 +193,24 @@ function ProductCard({ product }: { product: ProductItem }) {
       href={product.href}
       className="card-grid-item group flex h-full flex-col rounded-2xl border border-border bg-card p-4 transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-md"
     >
-      <CatalogImageCarousel
-        catalogId={product.id}
-        images={product.images}
-        kind="product"
-        alt={product.title}
-        compact
-      />
+      <div className="relative h-44 overflow-hidden rounded-xl bg-muted">
+        <Image
+          src={product.image}
+          alt={product.title}
+          fill
+          sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+          className="object-cover transition-transform duration-300 group-hover:scale-105"
+        />
+      </div>
       <span className="mt-4 flex h-11 w-11 items-center justify-center rounded-lg bg-muted transition-colors group-hover:bg-primary">
         <Icon className="h-5 w-5 text-primary group-hover:text-primary-foreground" />
       </span>
       <h3 className="mt-5 text-lg font-semibold text-foreground">
         {product.title}
       </h3>
-      <CatalogHtml
-        html={product.description}
-        className="catalog-rich-text mt-2 text-sm leading-relaxed text-muted-foreground"
-      />
+      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+        {product.description}
+      </p>
       <div className="mt-5 flex flex-wrap gap-1.5">
         {product.tags.map((tag) => (
           <Badge

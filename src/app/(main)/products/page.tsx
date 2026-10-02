@@ -1,8 +1,5 @@
 import type { Metadata } from "next";
 import { ProductsContentPage } from "@/components/products";
-import { getProductCatalogPage } from "@/lib/catalog";
-
-export const revalidate = 60;
 
 export const metadata: Metadata = {
   title:
@@ -39,7 +36,6 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function ProductsPage() {
-  const initialPage = await getProductCatalogPage();
-  return <ProductsContentPage initialPage={initialPage} />;
+export default function ProductsPage() {
+  return <ProductsContentPage />;
 }

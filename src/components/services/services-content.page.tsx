@@ -1,8 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { GetAllServicesCatalogs } from "@/api/services";
 import { Badge, Button } from "@/components/ui";
 import { motion, type Variants } from "framer-motion";
 import {
@@ -14,14 +12,6 @@ import {
   RefreshCw,
   Smartphone,
 } from "lucide-react";
-import { CatalogPagination } from "@/components/catalog/catalog-pagination";
-import type { CatalogPage } from "@/lib/catalog";
-import type {
-  IServiceCatalogImage,
-  IServicesCatalogs,
-} from "@/interfaces/services";
-import { CatalogHtml } from "@/components/catalog/catalog-html";
-import { CatalogImageCarousel } from "@/components/catalog/catalog-image-carousel";
 
 type ServiceIconKey =
   | "custom"
@@ -37,9 +27,8 @@ interface ServiceItem {
   description: string;
   tags: string[];
   icon: ServiceIconKey;
-  images: IServiceCatalogImage[];
 }
-const fallbackServices: ServiceItem[] = [
+const services: ServiceItem[] = [
   {
     id: "custom-web-systems",
     index: "01",
@@ -49,7 +38,6 @@ const fallbackServices: ServiceItem[] = [
       "Purpose-built software for how your business actually runs — scoped to your contract, with unlimited revisions until it's right.",
     tags: ["Unlimited revisions", "Contract-scoped", "Built from scratch"],
     icon: "custom",
-    images: [],
   },
   {
     id: "mobile-apps",
@@ -60,7 +48,6 @@ const fallbackServices: ServiceItem[] = [
       "Field, back-office, and customer-facing apps built for the industries you operate in.",
     tags: ["iOS & Android", "Back-office tools", "Field operations"],
     icon: "mobile",
-    images: [],
   },
   {
     id: "migration",
@@ -71,7 +58,6 @@ const fallbackServices: ServiceItem[] = [
       "Move off aging systems without losing data or downtime — modernized, documented, and built to scale with you.",
     tags: ["Zero data loss", "Modern stack", "Documented handover"],
     icon: "migration",
-    images: [],
   },
   {
     id: "consultation",
@@ -82,7 +68,6 @@ const fallbackServices: ServiceItem[] = [
       "We scope the project, map the risks, and give you a clear plan before anything gets built.",
     tags: ["Project scoping", "Technical audit", "Roadmap"],
     icon: "consultation",
-    images: [],
   },
   {
     id: "support",
@@ -93,7 +78,6 @@ const fallbackServices: ServiceItem[] = [
       "Ongoing fixes, monitoring, and recommendations after go-live.",
     tags: ["Issue resolution", "Monitoring", "Recommendations"],
     icon: "support",
-    images: [],
   },
 ];
 const serviceIcons: Record<
@@ -115,52 +99,7 @@ const rowVariants: Variants = {
   show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" } },
 };
 
-function apiService(item: IServicesCatalogs, index: number): ServiceItem {
-  const name = item.name.toLowerCase();
-  const icon: ServiceIconKey = name.includes("mobile")
-    ? "mobile"
-    : name.includes("migration")
-      ? "migration"
-      : name.includes("support")
-        ? "support"
-        : name.includes("consult")
-          ? "consultation"
-          : "custom";
-  return {
-    id: item.id,
-    index: String(index + 1).padStart(2, "0"),
-    title: item.name,
-    href: `/services/${encodeURIComponent(item.code)}`,
-    description: item.description,
-    tags: [item.category],
-    icon,
-    images: item.images ?? [],
-  };
-}
-
-export function ServicePageContent({
-  initialPage,
-}: {
-  initialPage?: CatalogPage<IServicesCatalogs> | null;
-}) {
-  const [page, setPage] = useState<CatalogPage<IServicesCatalogs> | null>(
-    initialPage ?? null,
-  );
-  useEffect(() => {
-    if (initialPage) return;
-    void GetAllServicesCatalogs({ page: 1, limit: 10 })
-      .then((response) => {
-        const data = response.data;
-        setPage({
-          items: data.services_catalogs,
-          totalItems: data.totalItems,
-          totalPages: data.totalPages,
-          currentPage: data.currentPage,
-        });
-      })
-      .catch(() => undefined);
-  }, [initialPage]);
-  const services = page?.items.map(apiService) ?? fallbackServices;
+export function ServicePageContent() {
   return (
     <section id="catalog" className="relative bg-background py-20 lg:py-28">
       <div className="mx-auto max-w-5xl px-6 lg:px-8">
@@ -195,9 +134,6 @@ export function ServicePageContent({
             </motion.div>
           ))}
         </motion.div>
-        {page && (
-          <CatalogPagination page={page} onPage={setPage} kind="services" />
-        )}
         <div className="mt-16 flex flex-col items-start gap-6 rounded-2xl border border-primary/15 bg-primary px-7 py-8 sm:flex-row sm:items-center sm:justify-between sm:px-9">
           <div>
             <p className="text-xl font-semibold text-primary-foreground">
@@ -238,20 +174,12 @@ function ServiceRow({ service }: { service: ServiceItem }) {
         </span>
       </div>
       <div className="flex-1">
-        <CatalogImageCarousel
-          catalogId={service.id}
-          images={service.images}
-          kind="service"
-          alt={service.title}
-          compact
-        />
         <h2 className="mt-4 text-xl font-semibold text-foreground group-hover:text-primary sm:text-2xl">
           {service.title}
         </h2>
-        <CatalogHtml
-          html={service.description}
-          className="catalog-rich-text mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base"
-        />
+        <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
+          {service.description}
+        </p>
         <div className="mt-4 flex flex-wrap gap-1.5">
           {service.tags.map((tag) => (
             <Badge

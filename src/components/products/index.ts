@@ -5,3 +5,4 @@ export * from "./product-printers.page";
 export * from "./pos-hardware.page";
 export * from "./bardcode-scanners.page";
 export * from './networking-equipment.page'
+export * from "./additional-product-pages.page";
