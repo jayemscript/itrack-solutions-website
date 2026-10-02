@@ -143,32 +143,52 @@ export default function Footer() {
               <span className="w-8 h-0.5 bg-primary mr-2"></span>
               Contact Us
             </h4>
-            <ul className="space-y-3">
-              <li className="flex items-start space-x-3 text-sm">
-                <MapPin className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                <span className="text-muted-foreground">
-                  3A Peaceful lane, Sanville, Culiat, Tandang Sora Quezon City
-                </span>
-              </li>
-              <li className="flex items-center space-x-3 text-sm">
-                <Phone className="w-5 h-5 text-primary shrink-0" />
-                <a
-                  href="tel:+63 2 8123-4567"
-                  className="text-muted-foreground hover:text-primary transition-colors"
-                >
-                  +63 2 8123-4567
-                </a>
-              </li>
-              <li className="flex items-center space-x-3 text-sm">
-                <Mail className="w-5 h-5 text-primary shrink-0" />
+            <div className="space-y-4 text-sm">
+              <div className="space-y-1">
+                <p className="font-semibold text-foreground">Head Office</p>
+                <p className="text-muted-foreground">
+                  3A Peaceful Lane, Sanville Subdivision
+                  <br />
+                  Tandang Sora Avenue, Quezon City
+                  <br />
+                  Philippines 1116
+                </p>
+                <p className="flex items-start gap-2 text-muted-foreground">
+                  <Phone className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                  <span>
+                    Tel: <a className="hover:text-primary" href="tel:+6322945622">+63 2 2945 622</a>,{" "}
+                    <a className="hover:text-primary" href="tel:+6323476883">+63 2 3476 883</a>
+                    <br />
+                    Fax: +63 2 3328 063
+                  </span>
+                </p>
+              </div>
+
+              <div className="space-y-1">
+                <p className="font-semibold text-foreground">Pampanga Office</p>
+                <p className="text-muted-foreground">
+                  B2L3 Summerfield Homes, San Rafael
+                  <br />
+                  Mexico, Pampanga, Philippines
+                </p>
+                <p className="flex items-start gap-2 text-muted-foreground">
+                  <Phone className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                  <a className="hover:text-primary" href="tel:+6329228488060">
+                    Tel: +632 922 8488060
+                  </a>
+                </p>
+              </div>
+
+              <p className="flex items-center gap-2">
+                <Mail className="h-4 w-4 shrink-0 text-primary" />
                 <a
                   href="mailto:ramil@itrackphils.com"
-                  className="text-muted-foreground hover:text-primary transition-colors"
+                  className="text-muted-foreground transition-colors hover:text-primary"
                 >
                   ramil@itrackphils.com
                 </a>
-              </li>
-            </ul>
+              </p>
+            </div>
 
             {/* Business Hours */}
             <div className="mt-4 p-3 bg-muted dark:bg-muted rounded-lg border border-border dark:border-border">
@@ -176,9 +196,8 @@ export default function Footer() {
                 Business Hours
               </p>
               <p className="text-xs text-muted-foreground">
-                Mon - Fri: 9:00 AM - 6:00 PM
+                Mon - Fri: 8:00 AM - 6:00 PM PHT
               </p>
-              <p className="text-xs text-muted-foreground">EST (UTC -5)</p>
             </div>
           </div>
         </div>

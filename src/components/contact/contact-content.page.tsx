@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { Button, Input, Label, Textarea } from "@/components/ui";
-import { extractErrorMessage } from "@/configs/api.helper";
 import useCreateInquiriesContact from "@/hooks/inquiries/use-create-inquiries-contact";
 import { motion, type Variants } from "framer-motion";
 import { ArrowRight, Clock, Mail, MapPin, PhoneCall } from "lucide-react";
@@ -39,13 +38,6 @@ const HERO = {
 
 const CONTACT_CHANNELS: ContactChannel[] = [
   {
-    id: "sales",
-    icon: PhoneCall,
-    label: "Sales & Consultation",
-    value: "+63 900 000 0000",
-    href: "tel:+639000000000",
-  },
-  {
     id: "email",
     icon: Mail,
     label: "Email",
@@ -53,10 +45,44 @@ const CONTACT_CHANNELS: ContactChannel[] = [
     href: "mailto:ramil@itrackphils.com",
   },
   {
-    id: "office",
+    id: "head-office-address",
     icon: MapPin,
-    label: "Office",
-    value: "3A Peaceful lane, Sanville, Culiat, Tandang Sora Quezon City",
+    label: "Head Office",
+    value:
+      "3A Peaceful Lane, Sanville Subdivision\nTandang Sora Avenue, Quezon City\nPhilippines 1116",
+  },
+  {
+    id: "head-office-phone-1",
+    icon: PhoneCall,
+    label: "Head Office Telephone",
+    value: "+63 2 2945 622",
+    href: "tel:+6322945622",
+  },
+  {
+    id: "head-office-phone-2",
+    icon: PhoneCall,
+    label: "Head Office Telephone",
+    value: "+63 2 3476 883",
+    href: "tel:+6323476883",
+  },
+  {
+    id: "head-office-fax",
+    icon: PhoneCall,
+    label: "Head Office Fax",
+    value: "+63 2 3328 063",
+  },
+  {
+    id: "pampanga-office-address",
+    icon: MapPin,
+    label: "Pampanga Office",
+    value: "B2L3 Summerfield Homes, San Rafael\nMexico, Pampanga, Philippines",
+  },
+  {
+    id: "pampanga-office-phone",
+    icon: PhoneCall,
+    label: "Pampanga Office Telephone",
+    value: "+632 922 8488060",
+    href: "tel:+6329228488060",
   },
   {
     id: "hours",
@@ -231,7 +257,7 @@ function ContactChannelRow({ channel }: { channel: ContactChannel }) {
         <p className="font-mono text-[10px] font-medium uppercase tracking-widest text-muted-foreground">
           {channel.label}
         </p>
-        <p className="mt-0.5 text-sm font-medium text-foreground">
+        <p className="mt-0.5 whitespace-pre-line text-sm font-medium text-foreground">
           {channel.value}
         </p>
       </div>
@@ -260,7 +286,8 @@ function ContactForm() {
   const [formState, setFormState] =
     useState<ContactFormState>(INITIAL_FORM_STATE);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const { createInquiry, error, isLoading } = useCreateInquiriesContact();
+  const [isMaintenanceFallback, setIsMaintenanceFallback] = useState(false);
+  const { createInquiry, isLoading } = useCreateInquiriesContact();
 
   const updateField = (field: keyof ContactFormState, value: string) => {
     setFormState((prev) => ({ ...prev, [field]: value }));
@@ -280,15 +307,9 @@ function ContactForm() {
       });
       setIsSubmitted(true);
     } catch {
-      // The hook stores the original error for the message shown below.
+      setIsMaintenanceFallback(true);
     }
   };
-
-  const errorMessage = error ? extractErrorMessage(error) : "";
-  const displayedErrorMessage =
-    errorMessage && errorMessage !== "Unknown error"
-      ? errorMessage
-      : "We couldn't send your message. Please try again.";
 
   if (isSubmitted) {
     return (
@@ -312,6 +333,60 @@ function ContactForm() {
           }}
         >
           Send Another Message
+        </Button>
+      </div>
+    );
+  }
+
+  if (isMaintenanceFallback) {
+    return (
+      <div
+        className="flex h-full flex-col items-start justify-center rounded-2xl border border-border bg-card p-6 sm:p-8"
+        role="status"
+        aria-live="polite"
+      >
+        <span className="font-mono text-[11px] font-medium uppercase tracking-widest text-secondary">
+          CONTACT THE TEAM DIRECTLY
+        </span>
+        <h3 className="mt-3 text-2xl font-bold text-foreground">
+          Sorry, our system is under maintenance.
+        </h3>
+        <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground">
+          Your message could not be submitted through the form. Please email or
+          call us directly and we&apos;ll be happy to help.
+        </p>
+        <div className="mt-6 flex flex-col gap-3 text-sm">
+          <a
+            href="mailto:ramil@itrackphils.com"
+            className="font-medium text-primary underline underline-offset-4"
+          >
+            ramil@itrackphils.com
+          </a>
+          <a
+            href="tel:+6322945622"
+            className="font-medium text-primary underline underline-offset-4"
+          >
+            Head Office: +63 2 2945 622
+          </a>
+          <a
+            href="tel:+6323476883"
+            className="font-medium text-primary underline underline-offset-4"
+          >
+            Head Office: +63 2 3476 883
+          </a>
+          <a
+            href="tel:+6329228488060"
+            className="font-medium text-primary underline underline-offset-4"
+          >
+            Pampanga Office: +632 922 8488060
+          </a>
+        </div>
+        <Button
+          variant="outline"
+          className="mt-7"
+          onClick={() => setIsMaintenanceFallback(false)}
+        >
+          Return to Contact Form
         </Button>
       </div>
     );
@@ -400,12 +475,6 @@ function ContactForm() {
           />
         </div>
       </div>
-
-      {error && (
-        <p className="mt-4 text-sm text-destructive" role="alert">
-          {displayedErrorMessage}
-        </p>
-      )}
 
       <Button
         type="submit"

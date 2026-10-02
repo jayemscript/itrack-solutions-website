@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { useReducedMotion } from "framer-motion";
 import {
   type CarouselApi,
   Carousel,
@@ -28,23 +27,19 @@ const clients = [
 
 export function HomeClientsPage() {
   const [api, setApi] = useState<CarouselApi>();
-  const [isHovered, setIsHovered] = useState(false);
   const [hasFocus, setHasFocus] = useState(false);
-  const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
-    if (!api || isHovered || hasFocus || prefersReducedMotion !== false) return;
+    if (!api || hasFocus) return;
 
     const interval = window.setInterval(() => api.scrollNext(), 1000);
     return () => window.clearInterval(interval);
-  }, [api, hasFocus, isHovered, prefersReducedMotion]);
+  }, [api, hasFocus]);
 
   return (
     <section
       aria-labelledby="home-clients-heading"
       className="border-y border-border bg-muted/30 py-14 sm:py-16"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
       onFocusCapture={() => setHasFocus(true)}
       onBlurCapture={(event) => {
         if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
@@ -67,7 +62,7 @@ export function HomeClientsPage() {
 
         <Carousel
           setApi={setApi}
-          opts={{ align: "start", loop: true }}
+          opts={{ align: "start", loop: true, slidesToScroll: 1 }}
           className="mx-10"
           aria-label="Client organizations"
         >
