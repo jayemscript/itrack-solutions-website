@@ -1,28 +1,18 @@
-import { notFound } from "next/navigation";
-import {
-  BarCodeScannersPage,
-  ConsumablesPage,
-  IndustrialMobileDevicePage,
-  NetworkingEquipmentPage,
-  PosHardwarePage,
-  ProductPrintersPage,
-  RFIDStickerPage,
-  SecurityCameraPage,
-} from "@/components/products";
+import { notFound, redirect } from "next/navigation";
 
-const productPages = {
-  "industrial-mobile-devices": IndustrialMobileDevicePage,
-  "mobile-computers": IndustrialMobileDevicePage,
-  "barcode-printers": ProductPrintersPage,
-  "id-printers": ProductPrintersPage,
-  "security-camera": SecurityCameraPage,
-  consumables: ConsumablesPage,
-  "rfid-readers-and-tags": RFIDStickerPage,
-  "rfid-stickers": RFIDStickerPage,
-  "pos-hardware": PosHardwarePage,
-  printers: ProductPrintersPage,
-  "barcode-scanners": BarCodeScannersPage,
-  "networking-equipment": NetworkingEquipmentPage,
+const productAnchors: Record<string, string> = {
+  "industrial-mobile-devices": "product-industrial-mobile-devices",
+  "mobile-computers": "product-industrial-mobile-devices",
+  "barcode-scanners": "product-barcode-scanners",
+  "barcode-printers": "product-barcode-printers",
+  "id-printers": "product-id-printers",
+  "security-camera": "product-security-camera",
+  consumables: "product-consumables",
+  "rfid-readers-and-tags": "product-rfid-readers-and-tags",
+  "rfid-stickers": "product-rfid-readers-and-tags",
+  printers: "product-barcode-printers",
+  "pos-hardware": "products",
+  "networking-equipment": "products",
 };
 
 export default async function ProductPage({
@@ -31,8 +21,8 @@ export default async function ProductPage({
   params: Promise<{ code: string }>;
 }) {
   const { code } = await params;
-  const Page = productPages[decodeURIComponent(code) as keyof typeof productPages];
+  const anchor = productAnchors[decodeURIComponent(code)];
 
-  if (!Page) notFound();
-  return <Page />;
+  if (!anchor) notFound();
+  redirect(`/#${anchor}`);
 }

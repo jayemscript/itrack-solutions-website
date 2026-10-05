@@ -97,13 +97,13 @@ const QUICK_LINKS: QuickLink[] = [
     id: "consultation",
     label: "Book a Consultation",
     description: "Scoping a new project or system",
-    href: "/services/consultation",
+    href: "/#service-consultation",
   },
   {
     id: "support",
     label: "Get Support",
     description: "Something's broken or acting up",
-    href: "/services/support",
+    href: "/#service-support",
   },
 ];
 

@@ -78,8 +78,8 @@ const consultationServiceContent: ConsultationServiceContent = {
     },
     description:
       "A structured consultation before any contract — we audit what you have, map what you need, and hand you a clear plan whether you build with us or not.",
-    primaryCta: { label: "Schedule a Call", href: "/contact" },
-    secondaryCta: { label: "View All Services", href: "/services" },
+    primaryCta: { label: "Schedule a Call", href: "/#contact" },
+    secondaryCta: { label: "View All Services", href: "/#services" },
   },
   inclusions: {
     eyebrow: "WHAT'S INCLUDED",
@@ -182,8 +182,8 @@ const consultationServiceContent: ConsultationServiceContent = {
     heading: "Ready to talk it through?",
     description:
       "Book a consultation and get a written plan back — no commitment required.",
-    primaryCta: { label: "Schedule a Call", href: "/contact" },
-    secondaryCta: { label: "Back to Services", href: "/services" },
+    primaryCta: { label: "Schedule a Call", href: "/#contact" },
+    secondaryCta: { label: "Back to Services", href: "/#services" },
   },
 };
 
@@ -233,7 +233,7 @@ function ServiceHeroSection({ hero }: { hero: ServiceHero }) {
           transition={{ duration: 0.4 }}
           className="mb-6 flex items-center gap-1.5 font-mono text-xs text-muted-foreground"
         >
-          <a href="/services" className="transition-colors hover:text-primary">
+          <a href="/#services" className="transition-colors hover:text-primary">
             Services
           </a>
           <ChevronRight className="h-3.5 w-3.5" />

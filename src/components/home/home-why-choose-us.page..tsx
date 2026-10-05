@@ -83,7 +83,7 @@ export function HomeWhyChooseUsPage() {
   const content = homeWhyChooseUsContent;
 
   return (
-    <section className="relative bg-muted/40 py-20 lg:py-28" id="why-us">
+    <section className="relative scroll-mt-28 bg-muted/40 py-20 lg:py-28" id="why-us">
       <div className="mx-auto max-w-6xl px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 16 }}

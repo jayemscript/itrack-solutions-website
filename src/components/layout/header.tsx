@@ -43,7 +43,7 @@ export default function Header({ isScrolled = false }: { isScrolled?: boolean })
           <div className="flex items-center space-x-3">
             {/* CTA Button Desktop */}
             <div className="hidden lg:flex items-center space-x-3">
-              <Link href="/contact">
+              <Link href="/#contact">
                 <Button
                   className="bg-primary-foreground text-primary hover:bg-primary-foreground/95 font-semibold"
                   size="sm"
@@ -74,7 +74,7 @@ export default function Header({ isScrolled = false }: { isScrolled?: boolean })
               <div className="border-t border-primary-foreground/20 mt-3 pt-4 space-y-2">
                 <HeaderNavMobile onNavigate={() => setIsOpen(false)} />
                 <div className="flex flex-col items-stretch space-y-2 px-2 pt-4 border-t border-primary-foreground/20">
-                  <Link href="/contact" className="w-full">
+                  <Link href="/#contact" className="w-full">
                     <Button
                       className="w-full bg-primary-foreground text-primary hover:bg-primary-foreground/90 font-semibold"
                       size="sm"

@@ -1,22 +1,15 @@
-import { notFound } from "next/navigation";
-import {
-  ConsultationServicePage,
-  CustomDevelopmentPage,
-  MigrationServicePage,
-  MobileAppsPage,
-  SupportMaintenanceServicePage,
-} from "@/components/services";
+import { notFound, redirect } from "next/navigation";
 
-const servicePages = {
-  "custom-development": CustomDevelopmentPage,
-  "customize-system": CustomDevelopmentPage,
-  "web-development": CustomDevelopmentPage,
-  "mobile-apps": MobileAppsPage,
-  migration: MigrationServicePage,
-  "legacy-migration": MigrationServicePage,
-  consultation: ConsultationServicePage,
-  support: SupportMaintenanceServicePage,
-  "support-and-maintenance": SupportMaintenanceServicePage,
+const serviceAnchors: Record<string, string> = {
+  "custom-development": "service-custom-development",
+  "customize-system": "service-custom-development",
+  "web-development": "service-custom-development",
+  "mobile-apps": "service-mobile-apps",
+  migration: "service-migration",
+  "legacy-migration": "service-migration",
+  consultation: "service-consultation",
+  support: "service-support",
+  "support-and-maintenance": "service-support",
 };
 
 export default async function ServicePage({
@@ -25,8 +18,8 @@ export default async function ServicePage({
   params: Promise<{ code: string }>;
 }) {
   const { code } = await params;
-  const Page = servicePages[decodeURIComponent(code) as keyof typeof servicePages];
+  const anchor = serviceAnchors[decodeURIComponent(code)];
 
-  if (!Page) notFound();
-  return <Page />;
+  if (!anchor) notFound();
+  redirect(`/#${anchor}`);
 }

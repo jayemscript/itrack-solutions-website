@@ -78,8 +78,8 @@ const supportMaintenanceContent: SupportMaintenanceContent = {
     },
     description:
       "Ongoing support for systems already in production — issue resolution, monitoring, and recommendations, whether we built it or someone else did.",
-    primaryCta: { label: "Get Support", href: "/contact" },
-    secondaryCta: { label: "View All Services", href: "/services" },
+    primaryCta: { label: "Get Support", href: "/#contact" },
+    secondaryCta: { label: "View All Services", href: "/#services" },
   },
   inclusions: {
     eyebrow: "WHAT'S INCLUDED",
@@ -180,8 +180,8 @@ const supportMaintenanceContent: SupportMaintenanceContent = {
   closing: {
     heading: "Something not working right?",
     description: "Tell us what's going on and we'll get eyes on it.",
-    primaryCta: { label: "Get Support", href: "/contact" },
-    secondaryCta: { label: "Back to Services", href: "/services" },
+    primaryCta: { label: "Get Support", href: "/#contact" },
+    secondaryCta: { label: "Back to Services", href: "/#services" },
   },
 };
 
@@ -231,7 +231,7 @@ function ServiceHeroSection({ hero }: { hero: ServiceHero }) {
           transition={{ duration: 0.4 }}
           className="mb-6 flex items-center gap-1.5 font-mono text-xs text-muted-foreground"
         >
-          <a href="/services" className="transition-colors hover:text-primary">
+          <a href="/#services" className="transition-colors hover:text-primary">
             Services
           </a>
           <ChevronRight className="h-3.5 w-3.5" />

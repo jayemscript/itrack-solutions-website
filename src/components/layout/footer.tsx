@@ -9,22 +9,22 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   const quickLinks = [
-    { name: "Home", href: "/" },
-    { name: "Services", href: "/services" },
-    { name: "Products", href: "/products" },
-    { name: "About Us", href: "/about" },
-    { name: "Contact", href: "/contact" },
+    { name: "Home", href: "/#home" },
+    { name: "Services", href: "/#services" },
+    { name: "Products", href: "/#products" },
+    { name: "About Us", href: "/#about" },
+    { name: "Contact", href: "/#contact" },
   ];
 
   const serviceLinks = [
-    { name: "Custom Development", href: "/services/custom-development" },
-    { name: "Mobile Apps", href: "/services/mobile-apps" },
+    { name: "Custom Development", href: "/#service-custom-development" },
+    { name: "Mobile Apps", href: "/#service-mobile-apps" },
   ];
 
   const resources = [
-    { name: "Privacy Policy", href: "/privacy" },
-    { name: "Terms & Conditions", href: "/terms" },
-    { name: "Service Agreement", href: "/service-agreement" },
+    { name: "Privacy Policy", href: "/#privacy-policy" },
+    { name: "Terms & Conditions", href: "/#terms" },
+    { name: "Service Agreement", href: "/#service-agreement" },
   ];
 
   const socialLinks = [

@@ -33,7 +33,7 @@ const services: ServiceItem[] = [
     id: "custom-web-systems",
     index: "01",
     title: "Custom Web Systems",
-    href: "/services/custom-development",
+    href: "/#service-custom-development",
     description:
       "Purpose-built software for how your business actually runs — scoped to your contract, with unlimited revisions until it's right.",
     tags: ["Unlimited revisions", "Contract-scoped", "Built from scratch"],
@@ -43,7 +43,7 @@ const services: ServiceItem[] = [
     id: "mobile-apps",
     index: "02",
     title: "Mobile Apps",
-    href: "/services/mobile-apps",
+    href: "/#service-mobile-apps",
     description:
       "Field, back-office, and customer-facing apps built for the industries you operate in.",
     tags: ["iOS & Android", "Back-office tools", "Field operations"],
@@ -53,7 +53,7 @@ const services: ServiceItem[] = [
     id: "migration",
     index: "03",
     title: "Legacy Migration",
-    href: "/services/migration",
+    href: "/#service-migration",
     description:
       "Move off aging systems without losing data or downtime — modernized, documented, and built to scale with you.",
     tags: ["Zero data loss", "Modern stack", "Documented handover"],
@@ -63,7 +63,7 @@ const services: ServiceItem[] = [
     id: "consultation",
     index: "04",
     title: "Consultation",
-    href: "/services/consultation",
+    href: "/#service-consultation",
     description:
       "We scope the project, map the risks, and give you a clear plan before anything gets built.",
     tags: ["Project scoping", "Technical audit", "Roadmap"],
@@ -73,7 +73,7 @@ const services: ServiceItem[] = [
     id: "support",
     index: "05",
     title: "Support & Maintenance",
-    href: "/services/support",
+    href: "/#service-support",
     description:
       "Ongoing fixes, monitoring, and recommendations after go-live.",
     tags: ["Issue resolution", "Monitoring", "Recommendations"],
@@ -101,7 +101,7 @@ const rowVariants: Variants = {
 
 export function ServicePageContent() {
   return (
-    <section id="catalog" className="relative bg-background py-20 lg:py-28">
+    <section id="services" className="relative scroll-mt-28 bg-background py-20 lg:py-28">
       <div className="mx-auto max-w-5xl px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -146,7 +146,7 @@ export function ServicePageContent() {
           </div>
           <Button asChild size="lg" variant="secondary">
             <Link
-              href="/services/consultation"
+              href="/#service-consultation"
               className="inline-flex items-center gap-2"
             >
               Book a Consultation <ArrowRight className="h-4 w-4" />

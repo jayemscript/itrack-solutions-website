@@ -85,8 +85,8 @@ const barcodeScannersContent: BarcodeScannersContent = {
     },
     description:
       "Handheld and fixed-mount barcode scanners for retail, warehousing, and field operations — paired with your POS or inventory system before they ever reach the floor.",
-    primaryCta: { label: "Request a Quote", href: "/services/consultation" },
-    secondaryCta: { label: "View All Products", href: "/products" },
+    primaryCta: { label: "Request a Quote", href: "/#service-consultation" },
+    secondaryCta: { label: "View All Products", href: "/#products" },
   },
   features: {
     eyebrow: "KEY FEATURES",
@@ -194,8 +194,8 @@ const barcodeScannersContent: BarcodeScannersContent = {
     heading: "Scanning slowing your team down?",
     description:
       "Tell us your volume and environment — we'll spec the right scanner setup.",
-    primaryCta: { label: "Request a Quote", href: "/services/consultation" },
-    secondaryCta: { label: "View All Products", href: "/products" },
+    primaryCta: { label: "Request a Quote", href: "/#service-consultation" },
+    secondaryCta: { label: "View All Products", href: "/#products" },
   },
 };
 
@@ -255,7 +255,7 @@ function ProductHeroSection({ hero }: { hero: ProductHero }) {
           transition={{ duration: 0.4 }}
           className="mb-6 flex items-center gap-1.5 font-mono text-xs text-muted-foreground"
         >
-          <a href="/products" className="transition-colors hover:text-primary">
+          <a href="/#products" className="transition-colors hover:text-primary">
             Products
           </a>
           <ChevronRight className="h-3.5 w-3.5" />

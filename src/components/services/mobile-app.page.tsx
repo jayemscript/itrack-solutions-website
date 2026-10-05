@@ -78,8 +78,8 @@ const mobileAppsContent: MobileAppsContent = {
     },
     description:
       "From back-office tools to customer-facing apps, we build native and cross-platform mobile software for the industries you actually operate in — retail, field service, logistics, and more.",
-    primaryCta: { label: "Start a Project", href: "/services/consultation" },
-    secondaryCta: { label: "View All Services", href: "/services" },
+    primaryCta: { label: "Start a Project", href: "/#service-consultation" },
+    secondaryCta: { label: "View All Services", href: "/#services" },
   },
   inclusions: {
     eyebrow: "WHAT'S INCLUDED",
@@ -185,9 +185,9 @@ const mobileAppsContent: MobileAppsContent = {
       "Tell us who needs to use it and what it needs to do — we'll scope it together.",
     primaryCta: {
       label: "Book a Consultation",
-      href: "/services/consultation",
+      href: "/#service-consultation",
     },
-    secondaryCta: { label: "Back to Services", href: "/services" },
+    secondaryCta: { label: "Back to Services", href: "/#services" },
   },
 };
 
@@ -237,7 +237,7 @@ function ServiceHeroSection({ hero }: { hero: ServiceHero }) {
           transition={{ duration: 0.4 }}
           className="mb-6 flex items-center gap-1.5 font-mono text-xs text-muted-foreground"
         >
-          <a href="/services" className="transition-colors hover:text-primary">
+          <a href="/#services" className="transition-colors hover:text-primary">
             Services
           </a>
           <ChevronRight className="h-3.5 w-3.5" />

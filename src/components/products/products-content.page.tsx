@@ -37,7 +37,7 @@ const products: ProductItem[] = [
   {
     id: "industrial-mobile-devices",
     title: "Industrial Mobile Devices",
-    href: "/products/industrial-mobile-devices",
+    href: "/#product-industrial-mobile-devices",
     description:
       "Rugged handheld computers and wearables built for warehouses, field service, and factory floors.",
     tags: ["Rugged & drop-tested", "Android & Windows", "Long battery life"],
@@ -47,7 +47,7 @@ const products: ProductItem[] = [
   {
     id: "barcode-scanners",
     title: "Barcode Scanners",
-    href: "/products/barcode-scanners",
+    href: "/#product-barcode-scanners",
     description:
       "Handheld and fixed-mount scanners matched to your throughput and environment.",
     tags: ["1D & 2D scanning", "Handheld & fixed-mount", "Wireless options"],
@@ -57,7 +57,7 @@ const products: ProductItem[] = [
   {
     id: "barcode-printers",
     title: "Barcode Printers",
-    href: "/products/barcode-printers",
+    href: "/#product-barcode-printers",
     description:
       "Reliable label and barcode printing for inventory, shipping, and retail workflows.",
     tags: ["Label printing", "Thermal printers", "Barcode labels"],
@@ -67,7 +67,7 @@ const products: ProductItem[] = [
   {
     id: "id-printers",
     title: "ID Printers",
-    href: "/products/id-printers",
+    href: "/#product-id-printers",
     description:
       "Card printers for employee badges, visitor passes, and membership IDs.",
     tags: ["ID cards", "Badge printing", "Card supplies"],
@@ -77,7 +77,7 @@ const products: ProductItem[] = [
   {
     id: "security-camera",
     title: "Security Camera",
-    href: "/products/security-camera",
+    href: "/#product-security-camera",
     description:
       "Business camera systems to help monitor facilities, work areas, and access points.",
     tags: ["Site monitoring", "Camera systems", "Business security"],
@@ -87,7 +87,7 @@ const products: ProductItem[] = [
   {
     id: "consumables",
     title: "Consumables",
-    href: "/products/consumables",
+    href: "/#product-consumables",
     description:
       "Labels, ribbons, receipt rolls, and other supplies to keep daily operations running.",
     tags: ["Labels", "Printer ribbons", "Receipt rolls"],
@@ -97,7 +97,7 @@ const products: ProductItem[] = [
   {
     id: "rfid-readers-and-tags",
     title: "RFID Readers & Tags",
-    href: "/products/rfid-readers-and-tags",
+    href: "/#product-rfid-readers-and-tags",
     description:
       "RFID readers and tags for inventory visibility, asset tracking, and operations.",
     tags: ["RFID readers", "RFID tags", "Asset tracking"],
@@ -129,7 +129,7 @@ const cardVariants: Variants = {
 
 export function ProductsContentPage() {
   return (
-    <section id="catalog" className="relative bg-background py-20 lg:py-28">
+    <section id="products" className="relative scroll-mt-28 bg-background py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -174,7 +174,7 @@ export function ProductsContentPage() {
           </div>
           <Button asChild size="lg" variant="secondary">
             <Link
-              href="/services/consultation"
+              href="/#service-consultation"
               className="inline-flex items-center gap-2"
             >
               Book a Consultation <ArrowRight className="h-4 w-4" />

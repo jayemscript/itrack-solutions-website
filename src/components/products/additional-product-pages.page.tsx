@@ -17,7 +17,7 @@ function AdditionalProductPage({
     <main className="bg-background px-6 py-20 lg:px-8 lg:py-28">
       <div className="mx-auto max-w-4xl">
         <Link
-          href="/products"
+          href="/#products"
           className="font-mono text-xs text-muted-foreground hover:text-primary"
         >
           ← Back to products
@@ -43,7 +43,7 @@ function AdditionalProductPage({
           ))}
         </ul>
         <Button asChild size="lg" className="mt-10">
-          <Link href="/services/consultation" className="inline-flex items-center gap-2">
+          <Link href="/#service-consultation" className="inline-flex items-center gap-2">
             Ask us about {title} <ArrowRight className="h-4 w-4" />
           </Link>
         </Button>
@@ -75,6 +75,34 @@ export function ConsumablesPage() {
         "Labels matched to your printer",
         "Ribbons and receipt rolls for daily use",
         "Supply recommendations for your workflow",
+      ]}
+    />
+  );
+}
+
+export function IDPrintersPage() {
+  return (
+    <AdditionalProductPage
+      title="ID Printers"
+      description="Card printers and supplies for producing employee badges, visitor passes, and membership IDs."
+      highlights={[
+        "ID card and badge printing",
+        "Printer and card supply options",
+        "Set up for your issuance workflow",
+      ]}
+    />
+  );
+}
+
+export function RFIDReadersAndTagsPage() {
+  return (
+    <AdditionalProductPage
+      title="RFID Readers & Tags"
+      description="RFID readers and tags configured for inventory visibility, asset tracking, and day-to-day operations."
+      highlights={[
+        "Readers matched to your operating environment",
+        "Tags for inventory and asset identification",
+        "Integration with your tracking workflow",
       ]}
     />
   );

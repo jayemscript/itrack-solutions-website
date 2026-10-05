@@ -74,8 +74,8 @@ const customDevelopmentContent: CustomDevelopmentContent = {
     },
     description:
       "We design and build custom web systems from scratch — internal tools, admin dashboards, client portals, and the APIs that connect them to everything else you run.",
-    primaryCta: { label: "Start a Project", href: "/services/consultation" },
-    secondaryCta: { label: "View All Services", href: "/services" },
+    primaryCta: { label: "Start a Project", href: "/#service-consultation" },
+    secondaryCta: { label: "View All Services", href: "/#services" },
   },
   inclusions: {
     eyebrow: "WHAT'S INCLUDED",
@@ -180,9 +180,9 @@ const customDevelopmentContent: CustomDevelopmentContent = {
       "Tell us what you're trying to build and we'll scope it together.",
     primaryCta: {
       label: "Book a Consultation",
-      href: "/services/consultation",
+      href: "/#service-consultation",
     },
-    secondaryCta: { label: "Back to Services", href: "/services" },
+    secondaryCta: { label: "Back to Services", href: "/#services" },
   },
 };
 
@@ -232,7 +232,7 @@ function ServiceHeroSection({ hero }: { hero: ServiceHero }) {
           transition={{ duration: 0.4 }}
           className="mb-6 flex items-center gap-1.5 font-mono text-xs text-muted-foreground"
         >
-          <a href="/services" className="transition-colors hover:text-primary">
+          <a href="/#services" className="transition-colors hover:text-primary">
             Services
           </a>
           <ChevronRight className="h-3.5 w-3.5" />

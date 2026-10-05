@@ -4,12 +4,12 @@ import { HomeContentPage } from "@/components/home";
 import PublicRouteLayout from "@/app/(main)/layout";
 
 export const metadata: Metadata = {
-  title: "Home | Itrack Solutions - IT Solutions & Products",
+  title: "Itrack Solutions | IT Solutions & Products",
   description:
-    "Welcome to Itrack Solutions - Your Partner in IT Solutions and Products",
+    "Explore Itrack Solutions products, services, company information, and contact details on one page.",
 };
 
-export default async function Home() {
+export default function Home() {
   return (
     <PublicRouteLayout>
       <HomeContentPage />

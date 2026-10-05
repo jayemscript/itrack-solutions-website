@@ -80,8 +80,8 @@ const productPrintersContent: ProductPrintersContent = {
     },
     description:
       "Receipt, label, and document printers integrated directly into your POS and business systems — configured to print the right thing, at the right station, every time.",
-    primaryCta: { label: "Request a Quote", href: "/services/consultation" },
-    secondaryCta: { label: "View All Products", href: "/products" },
+    primaryCta: { label: "Request a Quote", href: "/#service-consultation" },
+    secondaryCta: { label: "View All Products", href: "/#products" },
   },
   features: {
     eyebrow: "KEY FEATURES",
@@ -189,8 +189,8 @@ const productPrintersContent: ProductPrintersContent = {
     heading: "Need a printer that just works?",
     description:
       "Tell us what you're printing and where — we'll spec the right printer and connect it.",
-    primaryCta: { label: "Request a Quote", href: "/services/consultation" },
-    secondaryCta: { label: "View All Products", href: "/products" },
+    primaryCta: { label: "Request a Quote", href: "/#service-consultation" },
+    secondaryCta: { label: "View All Products", href: "/#products" },
   },
 };
 
@@ -250,7 +250,7 @@ function ProductHeroSection({ hero }: { hero: ProductHero }) {
           transition={{ duration: 0.4 }}
           className="mb-6 flex items-center gap-1.5 font-mono text-xs text-muted-foreground"
         >
-          <a href="/products" className="transition-colors hover:text-primary">
+          <a href="/#products" className="transition-colors hover:text-primary">
             Products
           </a>
           <ChevronRight className="h-3.5 w-3.5" />

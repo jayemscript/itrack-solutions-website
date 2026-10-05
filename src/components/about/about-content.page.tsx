@@ -137,8 +137,8 @@ const HERO = {
   },
   description:
     "Itrack Solutions INC has grown from a single-founder custom dev shop into a full-cycle systems partner — without ever handing your project off to a subcontractor.",
-  primaryCta: { label: "Talk to the Team", href: "/services/consultation" },
-  secondaryCta: { label: "Meet the Team", href: "#team" },
+  primaryCta: { label: "Talk to the Team", href: "/#service-consultation" },
+  secondaryCta: { label: "Meet the Team", href: "/#team" },
 };
 
 const VALUES_INTRO = {
@@ -166,8 +166,8 @@ const CLOSING = {
   heading: "Want to work with the team behind this?",
   description:
     "No account managers relaying messages — you talk directly to the people building your system.",
-  primaryCta: { label: "Talk to the Team", href: "/services/consultation" },
-  secondaryCta: { label: "View Services", href: "/services" },
+  primaryCta: { label: "Talk to the Team", href: "/#service-consultation" },
+  secondaryCta: { label: "View Services", href: "/#services" },
 };
 
 const MAX_TENURE = Math.max(...TEAM.map((member) => member.years));
@@ -252,7 +252,7 @@ function AboutHeroSection() {
 
 function ValuesSection() {
   return (
-    <section id="values" className="bg-muted/40 py-20 lg:py-24">
+    <section id="values" className="scroll-mt-28 bg-muted/40 py-20 lg:py-24">
       <div className="mx-auto max-w-6xl px-6 lg:px-8">
         <SectionIntroBlock section={VALUES_INTRO} />
 
@@ -402,7 +402,7 @@ function TimelineSection() {
 
 function TeamSection() {
   return (
-    <section id="team" className="bg-muted/40 py-20 lg:py-24">
+    <section id="team" className="scroll-mt-28 bg-muted/40 py-20 lg:py-24">
       <div className="mx-auto max-w-5xl px-6 lg:px-8">
         <SectionIntroBlock section={TEAM_INTRO} />
 

@@ -19,34 +19,29 @@ import {
   aboutSubMenus,
 } from './menus';
 
-// Smooth-scroll to a section without putting a hash in the URL.
+// Smooth-scroll to an in-page section when already on the landing page.
 const handleSectionClick = (
   e: React.MouseEvent<HTMLAnchorElement>,
   href: string,
 ) => {
   const url = new URL(href, window.location.origin);
-  const section = url.searchParams.get('section');
+  const section = url.hash.slice(1);
   const isSectionLink = Boolean(section);
 
-  if (isSectionLink) {
-    e.preventDefault();
-    const element = document.getElementById(section!);
+  if (!isSectionLink || url.pathname !== window.location.pathname) return;
 
-    if (element) {
-      const headerOffset = 75;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition =
-        elementPosition + window.pageYOffset - headerOffset;
+  e.preventDefault();
+  const element = document.getElementById(section);
 
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth',
-      });
+  if (element) {
+    const headerOffset = 90;
+    const elementPosition = element.getBoundingClientRect().top;
+    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
-      window.history.pushState(null, '', url.pathname);
-    } else {
-      window.location.assign(url.pathname);
-    }
+    window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+    window.history.pushState(null, '', url.href);
+  } else {
+    window.location.assign(url.href);
   }
 };
 
@@ -98,7 +93,7 @@ export default function HeaderNavDesktop() {
         <NavigationMenuItem>
           <NavigationMenuLink asChild>
             <Link
-              href="/contact"
+              href="/#contact"
               className={cn(
                 navigationMenuTriggerStyle(),
                 'bg-white text-primary hover:bg-slate-50 hover:text-primary data-state-open:bg-slate-50 data-state-open:text-primary dark:bg-primary dark:text-slate-50 dark:hover:bg-primary dark:hover:text-white dark:data-state-open:bg-primary dark:data-state-open:text-white rounded-md px-3 py-2 font-semibold',
@@ -122,7 +117,7 @@ const ListItem = React.forwardRef<
   }
 >(({ className, title, children, href, icon: Icon, ...props }, ref) => {
   const pathname = usePathname();
-  const section = href ? new URL(href, 'http://localhost').searchParams.get('section') : null;
+  const section = href ? new URL(href, 'http://localhost').hash.slice(1) : null;
   const isSectionLink = Boolean(section);
 
   return (

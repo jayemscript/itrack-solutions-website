@@ -84,8 +84,8 @@ const rfidStickerContent: RFIDStickerContent = {
     },
     description:
       "Passive and active RFID tags for inventory, asset tracking, and loss prevention — sized, printed, and deployed as part of a working tracking system, not sold as loose stickers.",
-    primaryCta: { label: "Request a Quote", href: "/services/consultation" },
-    secondaryCta: { label: "View All Products", href: "/products" },
+    primaryCta: { label: "Request a Quote", href: "/#service-consultation" },
+    secondaryCta: { label: "View All Products", href: "/#products" },
   },
   features: {
     eyebrow: "KEY FEATURES",
@@ -193,8 +193,8 @@ const rfidStickerContent: RFIDStickerContent = {
     heading: "Need tags for your inventory?",
     description:
       "Tell us what you're tracking and at what volume — we'll spec the right tag and reader setup.",
-    primaryCta: { label: "Request a Quote", href: "/services/consultation" },
-    secondaryCta: { label: "View All Products", href: "/products" },
+    primaryCta: { label: "Request a Quote", href: "/#service-consultation" },
+    secondaryCta: { label: "View All Products", href: "/#products" },
   },
 };
 
@@ -254,7 +254,7 @@ function ProductHeroSection({ hero }: { hero: ProductHero }) {
           transition={{ duration: 0.4 }}
           className="mb-6 flex items-center gap-1.5 font-mono text-xs text-muted-foreground"
         >
-          <a href="/products" className="transition-colors hover:text-primary">
+          <a href="/#products" className="transition-colors hover:text-primary">
             Products
           </a>
           <ChevronRight className="h-3.5 w-3.5" />

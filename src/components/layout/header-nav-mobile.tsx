@@ -127,7 +127,7 @@ export default function HeaderNavMobile({ onNavigate }: HeaderNavMobileProps) {
 
       {/* Contact - standalone link */}
       <Link
-        href="/contact"
+        href="/#contact"
         onClick={() => onNavigate?.()}
         className="flex items-center  rounded-md px-3 py-2 font-medium mt-1 transition-colors dark:hover:bg-primary/90 text-white"
       >

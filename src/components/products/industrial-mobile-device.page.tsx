@@ -84,8 +84,8 @@ const industrialMobileDeviceContent: IndustrialMobileDeviceContent = {
     },
     description:
       "Rugged mobile computers and wearables for warehouses, field service, and factory environments — configured, provisioned, and supported as part of your system, not shipped in a box and left.",
-    primaryCta: { label: "Request a Quote", href: "/services/consultation" },
-    secondaryCta: { label: "View All Products", href: "/products" },
+    primaryCta: { label: "Request a Quote", href: "/#service-consultation" },
+    secondaryCta: { label: "View All Products", href: "/#products" },
   },
   features: {
     eyebrow: "KEY FEATURES",
@@ -193,8 +193,8 @@ const industrialMobileDeviceContent: IndustrialMobileDeviceContent = {
     heading: "Need devices for your team?",
     description:
       "Tell us your environment and headcount — we'll spec the right device and configuration.",
-    primaryCta: { label: "Request a Quote", href: "/services/consultation" },
-    secondaryCta: { label: "View All Products", href: "/products" },
+    primaryCta: { label: "Request a Quote", href: "/#service-consultation" },
+    secondaryCta: { label: "View All Products", href: "/#products" },
   },
 };
 
@@ -254,7 +254,7 @@ function ProductHeroSection({ hero }: { hero: ProductHero }) {
           transition={{ duration: 0.4 }}
           className="mb-6 flex items-center gap-1.5 font-mono text-xs text-muted-foreground"
         >
-          <a href="/products" className="transition-colors hover:text-primary">
+          <a href="/#products" className="transition-colors hover:text-primary">
             Products
           </a>
           <ChevronRight className="h-3.5 w-3.5" />
