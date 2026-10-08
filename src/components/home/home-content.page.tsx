@@ -32,7 +32,9 @@ export function HomeContentPage() {
   return (
     <div>
       <div id="home" className="scroll-mt-28">
-        <HomeHeroPage />
+        <div className="w-full">
+          <img src="/images/hero-image.jpg" alt="" className="block w-full" />
+        </div>
       </div>
       <HomeClientsPage />
       <div id="features" className="scroll-mt-28">
