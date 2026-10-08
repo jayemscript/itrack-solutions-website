@@ -1,147 +1,46 @@
-import {
-  Code2,
-  Zap,
-  Info,
-  Briefcase,
-  Users,
-  Shield,
-  Smartphone,
-  RefreshCw,
-  ClipboardList,
-  LifeBuoy,
-  Radio,
-  Printer,
-  ScanLine,
-  Network,
-} from 'lucide-react';
+import { BookOpen, Briefcase, Code2, Info, Mail, Shield } from "lucide-react";
 
-// --- Submenu definitions for IT Solutions ---
-
-const homeSubMenus = [
+export const mainMenus = [
   {
-    title: 'Features',
-    href: '/#features',
-    description: 'Key features of our solutions',
-    icon: Zap,
-  },
-  {
-    title: 'Why Choose Us',
-    href: '/#why-us',
-    description: 'What makes us different',
-    icon: Shield,
-  },
-];
-
-const servicesSubMenus = [
-  {
-    title: "All Services",
-    href: "/#services",
-    description: "Explore all IT solutions",
-    icon: Code2,
-  },
-  {
-    title: "Custom Development",
-    href: "/#service-custom-development",
-    description: "Tailored software solutions",
-    icon: Code2,
-  },
-  {
-    title: "Mobile Apps",
-    href: "/#service-mobile-apps",
-    description: "Mobile App development",
-    icon: Smartphone,
-  },
-  {
-    title: "Legacy Migration",
-    href: "/#service-migration",
-    description: "Modernize aging systems",
-    icon: RefreshCw,
-  },
-  {
-    title: "Consultation",
-    href: "/#service-consultation",
-    description: "Project scoping & technical audits",
-    icon: ClipboardList,
-  },
-  {
-    title: "Support & Maintenance",
-    href: "/#service-support",
-    description: "Ongoing fixes & monitoring",
-    icon: LifeBuoy,
-  },
-];
-
-const productSubMenus = [
-  {
-    title: "All Products",
-    href: "/#products",
-    description:
-      "We also offer various IT Products to cater to your business needs",
-    icon: Briefcase,
-  },
-  {
-    title: "Industrial Mobile Devices",
-    href: "/#product-industrial-mobile-devices",
-    description: "Rugged mobile devices for inventory and field operations",
-    icon: Smartphone,
-  },
-  {
-    title: "Barcode Scanners",
-    href: "/#product-barcode-scanners",
-    description: "Scanning devices for retail and warehousing",
-    icon: ScanLine,
-  },
-  {
-    title: "Barcode Printers",
-    href: "/#product-barcode-printers",
-    description: "Industrial label and barcode printing solutions",
-    icon: Printer,
-  },
-  {
-    title: "ID Printers",
-    href: "/#product-id-printers",
-    description: "Professional ID card and badge printing solutions",
-    icon: Printer,
-  },
-  {
-    title: "Security Camera",
-    href: "/#product-security-camera",
-    description: "Business camera systems for site monitoring",
-    icon: Network,
-  },
-  {
-    title: "Consumables",
-    href: "/#product-consumables",
-    description: "Labels, ribbons, receipt rolls, and supplies",
-    icon: Briefcase,
-  },
-  {
-    title: "RFID Readers & Tags",
-    href: "/#product-rfid-readers-and-tags",
-    description: "RFID tracking solutions for inventory and assets",
-    icon: Radio,
-  },
-];
-
-const aboutSubMenus = [
-  {
-    title: 'About Us',
-    href: '/#about',
-    description: 'Learn about Itrack Solutions',
+    title: "Home",
+    href: "/#home",
+    description: "Return to the top of the landing page",
     icon: Info,
   },
   {
-    title: 'Our Team',
-    href: '/#team',
-    description: 'Meet our experts',
-    icon: Users,
+    title: "Features",
+    href: "/#features",
+    description: "Explore our key solutions",
+    icon: BookOpen,
   },
   {
-    title: 'Our Values',
-    href: '/#values',
-    description: 'What we believe in',
+    title: "Why Choose Us",
+    href: "/#why-us",
+    description: "Learn how we work with clients",
     icon: Shield,
   },
+  {
+    title: "Services",
+    href: "/#services",
+    description: "View our software and IT services",
+    icon: Code2,
+  },
+  {
+    title: "Products",
+    href: "/#products",
+    description: "Browse our product categories",
+    icon: Briefcase,
+  },
+  {
+    title: "About",
+    href: "/#about",
+    description: "Learn about Itrack Solutions",
+    icon: Info,
+  },
+  {
+    title: "Contact",
+    href: "/#contact",
+    description: "Get in touch with Itrack Solutions",
+    icon: Mail,
+  },
 ];
-
-export { homeSubMenus, servicesSubMenus, productSubMenus, aboutSubMenus };

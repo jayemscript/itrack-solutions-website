@@ -1,12 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
-import { Badge, Button } from "@/components/ui";
+import { Badge } from "@/components/ui";
 import { motion, type Variants } from "framer-motion";
 import {
-  ArrowRight,
-  ArrowUpRight,
   Cpu,
   Network,
   Printer,
@@ -26,7 +23,6 @@ type ProductIconKey =
 interface ProductItem {
   id: string;
   title: string;
-  href: string;
   description: string;
   tags: string[];
   icon: ProductIconKey;
@@ -37,7 +33,6 @@ const products: ProductItem[] = [
   {
     id: "industrial-mobile-devices",
     title: "Industrial Mobile Devices",
-    href: "/#product-industrial-mobile-devices",
     description:
       "Rugged handheld computers and wearables built for warehouses, field service, and factory floors.",
     tags: ["Rugged & drop-tested", "Android & Windows", "Long battery life"],
@@ -47,7 +42,6 @@ const products: ProductItem[] = [
   {
     id: "barcode-scanners",
     title: "Barcode Scanners",
-    href: "/#product-barcode-scanners",
     description:
       "Handheld and fixed-mount scanners matched to your throughput and environment.",
     tags: ["1D & 2D scanning", "Handheld & fixed-mount", "Wireless options"],
@@ -57,7 +51,6 @@ const products: ProductItem[] = [
   {
     id: "barcode-printers",
     title: "Barcode Printers",
-    href: "/#product-barcode-printers",
     description:
       "Reliable label and barcode printing for inventory, shipping, and retail workflows.",
     tags: ["Label printing", "Thermal printers", "Barcode labels"],
@@ -67,7 +60,6 @@ const products: ProductItem[] = [
   {
     id: "id-printers",
     title: "ID Printers",
-    href: "/#product-id-printers",
     description:
       "Card printers for employee badges, visitor passes, and membership IDs.",
     tags: ["ID cards", "Badge printing", "Card supplies"],
@@ -77,7 +69,6 @@ const products: ProductItem[] = [
   {
     id: "security-camera",
     title: "Security Camera",
-    href: "/#product-security-camera",
     description:
       "Business camera systems to help monitor facilities, work areas, and access points.",
     tags: ["Site monitoring", "Camera systems", "Business security"],
@@ -87,7 +78,6 @@ const products: ProductItem[] = [
   {
     id: "consumables",
     title: "Consumables",
-    href: "/#product-consumables",
     description:
       "Labels, ribbons, receipt rolls, and other supplies to keep daily operations running.",
     tags: ["Labels", "Printer ribbons", "Receipt rolls"],
@@ -97,7 +87,6 @@ const products: ProductItem[] = [
   {
     id: "rfid-readers-and-tags",
     title: "RFID Readers & Tags",
-    href: "/#product-rfid-readers-and-tags",
     description:
       "RFID readers and tags for inventory visibility, asset tracking, and operations.",
     tags: ["RFID readers", "RFID tags", "Asset tracking"],
@@ -162,25 +151,6 @@ export function ProductsContentPage() {
             </motion.div>
           ))}
         </motion.div>
-        <div className="mt-16 flex flex-col items-start gap-6 rounded-2xl border border-primary/15 bg-primary px-7 py-8 sm:flex-row sm:items-center sm:justify-between sm:px-9">
-          <div>
-            <p className="text-xl font-semibold text-primary-foreground">
-              Don&apos;t see what you need?
-            </p>
-            <p className="mt-1.5 text-sm text-primary-foreground/75 sm:text-base">
-              We source hardware beyond this list too — tell us what your
-              business runs on.
-            </p>
-          </div>
-          <Button asChild size="lg" variant="secondary">
-            <Link
-              href="/#service-consultation"
-              className="inline-flex items-center gap-2"
-            >
-              Book a Consultation <ArrowRight className="h-4 w-4" />
-            </Link>
-          </Button>
-        </div>
       </div>
     </section>
   );
@@ -189,21 +159,18 @@ export function ProductsContentPage() {
 function ProductCard({ product }: { product: ProductItem }) {
   const Icon = productIcons[product.icon];
   return (
-    <Link
-      href={product.href}
-      className="card-grid-item group flex h-full flex-col rounded-2xl border border-border bg-card p-4 transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-md"
-    >
+    <article className="card-grid-item flex h-full flex-col rounded-2xl border border-border bg-card p-4">
       <div className="relative h-44 overflow-hidden rounded-xl bg-muted">
         <Image
           src={product.image}
           alt={product.title}
           fill
           sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-          className="object-cover transition-transform duration-300 group-hover:scale-105"
+          className="object-cover"
         />
       </div>
-      <span className="mt-4 flex h-11 w-11 items-center justify-center rounded-lg bg-muted transition-colors group-hover:bg-primary">
-        <Icon className="h-5 w-5 text-primary group-hover:text-primary-foreground" />
+      <span className="mt-4 flex h-11 w-11 items-center justify-center rounded-lg bg-muted">
+        <Icon className="h-5 w-5 text-primary" />
       </span>
       <h3 className="mt-5 text-lg font-semibold text-foreground">
         {product.title}
@@ -222,9 +189,6 @@ function ProductCard({ product }: { product: ProductItem }) {
           </Badge>
         ))}
       </div>
-      <div className="mt-auto flex items-center gap-1.5 pt-6 text-sm font-medium text-primary">
-        View Product <ArrowUpRight className="h-3.5 w-3.5" />
-      </div>
-    </Link>
+    </article>
   );
 }

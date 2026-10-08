@@ -45,7 +45,7 @@ export function HomeFeaturesPage() {
   const content = homeFeaturesContent;
 
   return (
-    <section className="relative bg-background py-20 lg:py-28" id="solutions">
+    <section className="relative bg-background py-20 lg:py-28 scroll-mt-28" id="features">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 16 }}

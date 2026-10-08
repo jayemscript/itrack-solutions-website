@@ -17,14 +17,13 @@ export default function Footer() {
   ];
 
   const serviceLinks = [
-    { name: "Custom Development", href: "/#service-custom-development" },
-    { name: "Mobile Apps", href: "/#service-mobile-apps" },
+    { name: "All Services", href: "/#services" },
   ];
 
   const resources = [
-    { name: "Privacy Policy", href: "/#privacy-policy" },
-    { name: "Terms & Conditions", href: "/#terms" },
-    { name: "Service Agreement", href: "/#service-agreement" },
+    { name: "Privacy Policy", href: "/privacy" },
+    { name: "Terms & Conditions", href: "/terms" },
+    { name: "Service Agreement", href: "/service-agreement" },
   ];
 
   const socialLinks = [

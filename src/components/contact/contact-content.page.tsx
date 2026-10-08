@@ -14,13 +14,6 @@ interface ContactChannel {
   href?: string;
 }
 
-interface QuickLink {
-  id: string;
-  label: string;
-  description: string;
-  href: string;
-}
-
 interface TopicOption {
   value: string;
   label: string;
@@ -92,21 +85,6 @@ const CONTACT_CHANNELS: ContactChannel[] = [
   },
 ];
 
-const QUICK_LINKS: QuickLink[] = [
-  {
-    id: "consultation",
-    label: "Book a Consultation",
-    description: "Scoping a new project or system",
-    href: "/#service-consultation",
-  },
-  {
-    id: "support",
-    label: "Get Support",
-    description: "Something's broken or acting up",
-    href: "/#service-support",
-  },
-];
-
 const TOPIC_OPTIONS: TopicOption[] = [
   { value: "general", label: "General Inquiry" },
   { value: "custom-development", label: "Custom Development" },
@@ -147,16 +125,16 @@ const INITIAL_FORM_STATE: ContactFormState = {
 
 export function ContactContentPage() {
   return (
-    <>
+    <section id="contact" className="scroll-mt-28">
       <ContactHeroSection />
       <ContactBodySection />
-    </>
+    </section>
   );
 }
 
 function ContactHeroSection() {
   return (
-    <section className="relative overflow-hidden bg-background">
+    <div className="relative overflow-hidden bg-background">
       <BlueprintBackdrop />
 
       <div className="relative mx-auto max-w-4xl px-6 pb-12 pt-24 lg:px-8 lg:pb-16 lg:pt-32">
@@ -188,13 +166,13 @@ function ContactHeroSection() {
           </motion.p>
         </motion.div>
       </div>
-    </section>
+    </div>
   );
 }
 
 function ContactBodySection() {
   return (
-    <section className="bg-background pb-20 lg:pb-28">
+    <div className="bg-background pb-20 lg:pb-28">
       <div className="mx-auto max-w-6xl px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-5 lg:gap-12">
           <motion.div
@@ -210,25 +188,6 @@ function ContactBodySection() {
               ))}
             </motion.div>
 
-            <motion.div variants={itemVariants} className="mt-8 space-y-3">
-              {QUICK_LINKS.map((link) => (
-                <a
-                  key={link.id}
-                  href={link.href}
-                  className="group flex items-center justify-between rounded-xl border border-border bg-card px-5 py-4 transition-all hover:border-primary/30 hover:shadow-sm"
-                >
-                  <div>
-                    <p className="text-sm font-semibold text-foreground">
-                      {link.label}
-                    </p>
-                    <p className="mt-0.5 text-xs text-muted-foreground">
-                      {link.description}
-                    </p>
-                  </div>
-                  <ArrowRight className="h-4 w-4 shrink-0 text-primary transition-transform group-hover:translate-x-0.5" />
-                </a>
-              ))}
-            </motion.div>
           </motion.div>
 
           <motion.div
@@ -242,7 +201,7 @@ function ContactBodySection() {
           </motion.div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }
 

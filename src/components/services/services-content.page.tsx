@@ -1,11 +1,8 @@
 "use client";
 
-import Link from "next/link";
-import { Badge, Button } from "@/components/ui";
+import { Badge } from "@/components/ui";
 import { motion, type Variants } from "framer-motion";
 import {
-  ArrowRight,
-  ArrowUpRight,
   ClipboardList,
   Code2,
   LifeBuoy,
@@ -23,7 +20,6 @@ interface ServiceItem {
   id: string;
   index: string;
   title: string;
-  href: string;
   description: string;
   tags: string[];
   icon: ServiceIconKey;
@@ -33,7 +29,6 @@ const services: ServiceItem[] = [
     id: "custom-web-systems",
     index: "01",
     title: "Custom Web Systems",
-    href: "/#service-custom-development",
     description:
       "Purpose-built software for how your business actually runs — scoped to your contract, with unlimited revisions until it's right.",
     tags: ["Unlimited revisions", "Contract-scoped", "Built from scratch"],
@@ -43,7 +38,6 @@ const services: ServiceItem[] = [
     id: "mobile-apps",
     index: "02",
     title: "Mobile Apps",
-    href: "/#service-mobile-apps",
     description:
       "Field, back-office, and customer-facing apps built for the industries you operate in.",
     tags: ["iOS & Android", "Back-office tools", "Field operations"],
@@ -53,7 +47,6 @@ const services: ServiceItem[] = [
     id: "migration",
     index: "03",
     title: "Legacy Migration",
-    href: "/#service-migration",
     description:
       "Move off aging systems without losing data or downtime — modernized, documented, and built to scale with you.",
     tags: ["Zero data loss", "Modern stack", "Documented handover"],
@@ -63,7 +56,6 @@ const services: ServiceItem[] = [
     id: "consultation",
     index: "04",
     title: "Consultation",
-    href: "/#service-consultation",
     description:
       "We scope the project, map the risks, and give you a clear plan before anything gets built.",
     tags: ["Project scoping", "Technical audit", "Roadmap"],
@@ -73,7 +65,6 @@ const services: ServiceItem[] = [
     id: "support",
     index: "05",
     title: "Support & Maintenance",
-    href: "/#service-support",
     description:
       "Ongoing fixes, monitoring, and recommendations after go-live.",
     tags: ["Issue resolution", "Monitoring", "Recommendations"],
@@ -126,7 +117,7 @@ export function ServicePageContent() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.1 }}
-          className="mt-14 divide-y divide-border border-y border-border"
+          className="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-2"
         >
           {services.map((service) => (
             <motion.div key={service.id} variants={rowVariants}>
@@ -134,25 +125,6 @@ export function ServicePageContent() {
             </motion.div>
           ))}
         </motion.div>
-        <div className="mt-16 flex flex-col items-start gap-6 rounded-2xl border border-primary/15 bg-primary px-7 py-8 sm:flex-row sm:items-center sm:justify-between sm:px-9">
-          <div>
-            <p className="text-xl font-semibold text-primary-foreground">
-              Not sure where to start?
-            </p>
-            <p className="mt-1.5 text-sm text-primary-foreground/75 sm:text-base">
-              Book a free consultation and we&apos;ll help you figure out the
-              right track.
-            </p>
-          </div>
-          <Button asChild size="lg" variant="secondary">
-            <Link
-              href="/#service-consultation"
-              className="inline-flex items-center gap-2"
-            >
-              Book a Consultation <ArrowRight className="h-4 w-4" />
-            </Link>
-          </Button>
-        </div>
       </div>
     </section>
   );
@@ -161,20 +133,17 @@ export function ServicePageContent() {
 function ServiceRow({ service }: { service: ServiceItem }) {
   const Icon = serviceIcons[service.icon];
   return (
-    <Link
-      href={service.href}
-      className="group flex flex-col gap-5 py-8 transition-colors sm:flex-row sm:items-center sm:gap-8"
-    >
-      <div className="flex items-center gap-4 sm:w-16 sm:shrink-0 sm:flex-col sm:items-start sm:gap-3">
-        <span className="font-mono text-sm font-medium text-muted-foreground sm:text-base">
+    <article className="flex h-full flex-col rounded-2xl border border-border bg-card p-6">
+      <div className="flex items-center gap-4">
+        <span className="font-mono text-sm font-medium text-muted-foreground">
           {service.index}
         </span>
-        <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-muted group-hover:bg-primary">
-          <Icon className="h-5 w-5 text-primary group-hover:text-primary-foreground" />
+        <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-muted">
+          <Icon className="h-5 w-5 text-primary" />
         </span>
       </div>
       <div className="flex-1">
-        <h2 className="mt-4 text-xl font-semibold text-foreground group-hover:text-primary sm:text-2xl">
+        <h2 className="mt-5 text-xl font-semibold text-foreground sm:text-2xl">
           {service.title}
         </h2>
         <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
@@ -192,12 +161,6 @@ function ServiceRow({ service }: { service: ServiceItem }) {
           ))}
         </div>
       </div>
-      <div className="flex shrink-0 items-center gap-2 text-sm font-medium text-primary">
-        <span className="hidden sm:inline">View service</span>
-        <span className="flex h-9 w-9 items-center justify-center rounded-full border border-border group-hover:border-primary group-hover:bg-primary">
-          <ArrowUpRight className="h-4 w-4 group-hover:text-primary-foreground" />
-        </span>
-      </div>
-    </Link>
+    </article>
   );
 }

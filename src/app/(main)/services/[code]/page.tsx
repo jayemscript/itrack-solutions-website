@@ -1,16 +1,16 @@
 import { notFound, redirect } from "next/navigation";
 
-const serviceAnchors: Record<string, string> = {
-  "custom-development": "service-custom-development",
-  "customize-system": "service-custom-development",
-  "web-development": "service-custom-development",
-  "mobile-apps": "service-mobile-apps",
-  migration: "service-migration",
-  "legacy-migration": "service-migration",
-  consultation: "service-consultation",
-  support: "service-support",
-  "support-and-maintenance": "service-support",
-};
+const serviceCodes = new Set([
+  "custom-development",
+  "customize-system",
+  "web-development",
+  "mobile-apps",
+  "migration",
+  "legacy-migration",
+  "consultation",
+  "support",
+  "support-and-maintenance",
+]);
 
 export default async function ServicePage({
   params,
@@ -18,8 +18,8 @@ export default async function ServicePage({
   params: Promise<{ code: string }>;
 }) {
   const { code } = await params;
-  const anchor = serviceAnchors[decodeURIComponent(code)];
+  const serviceCode = decodeURIComponent(code);
 
-  if (!anchor) notFound();
-  redirect(`/#${anchor}`);
+  if (!serviceCodes.has(serviceCode)) notFound();
+  redirect("/#services");
 }
