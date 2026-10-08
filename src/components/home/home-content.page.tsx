@@ -2,6 +2,7 @@
 
 import { HomeFeaturesPage } from "./home-features.page";
 import { HomeWhyChooseUsPage } from "./home-why-choose-us.page.";
+import { HomeClientsPage } from "./home-clients.page";
 import { AboutContentPage } from "@/components/about";
 import { ContactContentPage } from "@/components/contact";
 import { ProductsContentPage } from "@/components/products/products-content.page";
@@ -17,6 +18,7 @@ export function HomeContentPage() {
       </section>
       <HomeFeaturesPage />
       <HomeWhyChooseUsPage />
+      <HomeClientsPage />
       <ServicePageContent />
       <ProductsContentPage />
       <section id="about" className="scroll-mt-28">
