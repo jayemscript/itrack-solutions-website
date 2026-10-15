@@ -1,4 +1,12 @@
-import { BookOpen, Briefcase, Code2, Info, Mail, Shield } from "lucide-react";
+import {
+  BookOpen,
+  Briefcase,
+  Code2,
+  Info,
+  Mail,
+  Newspaper,
+  Shield,
+} from "lucide-react";
 
 export const mainMenus = [
   {
@@ -30,6 +38,12 @@ export const mainMenus = [
     href: "/#products",
     description: "Browse our product categories",
     icon: Briefcase,
+  },
+  {
+    title: "Insights",
+    href: "/#whats-new",
+    description: "Read insights on workplace technology and operations",
+    icon: Newspaper,
   },
   {
     title: "About",

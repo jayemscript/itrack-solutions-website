@@ -7,6 +7,7 @@ import { AboutContentPage } from "@/components/about";
 import { ContactContentPage } from "@/components/contact";
 import { ProductsContentPage } from "@/components/products/products-content.page";
 import { ServicePageContent } from "@/components/services/services-content.page";
+import WhatsNewContent from "@/components/whats-new/whats-new-content";
 
 export function HomeContentPage() {
   return (
@@ -19,6 +20,7 @@ export function HomeContentPage() {
       <HomeFeaturesPage />
       <HomeWhyChooseUsPage />
       <HomeClientsPage />
+      <WhatsNewContent />
       <ServicePageContent />
       <ProductsContentPage />
       <section id="about" className="scroll-mt-28">
